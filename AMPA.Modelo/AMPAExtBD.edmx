@@ -1,0 +1,1595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AMPAEXTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTIVIDAD">
+          <Key>
+            <PropertyRef Name="ID_ACTIVIDAD" />
+          </Key>
+          <Property Name="ID_ACTIVIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="ID_AMPA" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ACTIVO" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="nvarchar" MaxLength="250" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_DESCUENTO">
+          <Key>
+            <PropertyRef Name="ID_ACT_DESCUENTO" />
+          </Key>
+          <Property Name="ID_ACT_DESCUENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ACTIVIDAD" Type="int" Nullable="false" />
+          <Property Name="ID_DESCUENTO" Type="int" Nullable="false" />
+          <Property Name="VALOR" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_HORARIO">
+          <Key>
+            <PropertyRef Name="ID_ACT_HORARIO" />
+          </Key>
+          <Property Name="ID_ACT_HORARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ACTIVIDAD" Type="int" Nullable="false" />
+          <Property Name="ID_MONITOR" Type="int" />
+          <Property Name="DIAS" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="HORA_INI" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HORA_FIN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUOTA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="ID_ALUMNO" />
+          </Key>
+          <Property Name="ID_ALUMNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_TUTOR" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="FECHA_NACIMIENTO" Type="datetime" Nullable="false" />
+          <Property Name="ID_CURSO_CLASE" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALUMNO_ACTIVIDAD">
+          <Key>
+            <PropertyRef Name="ID_ALUM_ACT" />
+          </Key>
+          <Property Name="ID_ALUM_ACT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ALUMNO" Type="int" Nullable="false" />
+          <Property Name="ID_ACT_HORARIO" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AMPA">
+          <Key>
+            <PropertyRef Name="ID_AMPA" />
+          </Key>
+          <Property Name="ID_AMPA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NIF" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLASE">
+          <Key>
+            <PropertyRef Name="ID_CLASE" />
+          </Key>
+          <Property Name="ID_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CURSO">
+          <Key>
+            <PropertyRef Name="ID_CURSO" />
+          </Key>
+          <Property Name="ID_CURSO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CURSO_CLASE">
+          <Key>
+            <PropertyRef Name="ID_CURSO_CLASE" />
+          </Key>
+          <Property Name="ID_CURSO_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CURSO" Type="int" Nullable="false" />
+          <Property Name="ID_CLASE" Type="int" Nullable="false" />
+          <Property Name="ID_AMPA" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DESCUENTO">
+          <Key>
+            <PropertyRef Name="ID_DESCUENTO" />
+          </Key>
+          <Property Name="ID_DESCUENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIF" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RAZON_SOCIAL" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PAGINA_WEB" Type="varchar" MaxLength="200" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="EMPRESA_AMPA">
+          <Key>
+            <PropertyRef Name="ID_AMPA" />
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_AMPA" Type="int" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="MOTIVO_BAJA" Type="varchar" MaxLength="500" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="MONITOR">
+          <Key>
+            <PropertyRef Name="ID_MONITOR" />
+          </Key>
+          <Property Name="ID_MONITOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="250" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_DOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_TIPO_DOCUMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TUTOR">
+          <Key>
+            <PropertyRef Name="ID_TUTOR" />
+          </Key>
+          <Property Name="ID_TUTOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_AMPA" Type="int" Nullable="false" />
+          <Property Name="T1_ID_TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="T1_NUMERO_DOCUMENTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="T1_NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="T1_APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="T1_APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="T1_EMAIL" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="T1_TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="T2_ID_TIPO_DOCUMENTO" Type="int" />
+          <Property Name="T2_NUMERO_DOCUMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="T2_NOMBRE" Type="varchar" MaxLength="100" />
+          <Property Name="T2_APELLIDO1" Type="varchar" MaxLength="100" />
+          <Property Name="T2_APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="T2_EMAIL" Type="varchar" MaxLength="150" />
+          <Property Name="T2_TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="INDIVIDUAL" Type="varchar" MaxLength="1" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_AMPA">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_AMPA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="250" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_USUARIO_EMP" />
+          </Key>
+          <Property Name="ID_USUARIO_EMP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="250" />
+          <Property Name="FECHA" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime2" Precision="7" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ACTIVIDAD__ID_AC__40E497F3">
+          <End Role="ACTIVIDAD" Type="Self.ACTIVIDAD" Multiplicity="1" />
+          <End Role="ACTIVIDAD_HORARIO" Type="Self.ACTIVIDAD_HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_AC__47919582">
+          <End Role="ACTIVIDAD" Type="Self.ACTIVIDAD" Multiplicity="1" />
+          <End Role="ACTIVIDAD_DESCUENTO" Type="Self.ACTIVIDAD_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_DESCUENTO">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_AM__3C1FE2D6">
+          <End Role="AMPA" Type="Self.AMPA" Multiplicity="1" />
+          <End Role="ACTIVIDAD" Type="Self.ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_DE__4885B9BB">
+          <End Role="DESCUENTO" Type="Self.DESCUENTO" Multiplicity="1" />
+          <End Role="ACTIVIDAD_DESCUENTO" Type="Self.ACTIVIDAD_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DESCUENTO">
+              <PropertyRef Name="ID_DESCUENTO" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_DESCUENTO">
+              <PropertyRef Name="ID_DESCUENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_EM__3B2BBE9D">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="ACTIVIDAD" Type="Self.ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_MO__41D8BC2C">
+          <End Role="MONITOR" Type="Self.MONITOR" Multiplicity="0..1" />
+          <End Role="ACTIVIDAD_HORARIO" Type="Self.ACTIVIDAD_HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONITOR">
+              <PropertyRef Name="ID_MONITOR" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_MONITOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO__ID_CURSO__520F23F5">
+          <End Role="CURSO_CLASE" Type="Self.CURSO_CLASE" Multiplicity="1" />
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CURSO_CLASE" />
+            </Principal>
+            <Dependent Role="ALUMNO">
+              <PropertyRef Name="ID_CURSO_CLASE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO__ID_TUTOR__511AFFBC">
+          <End Role="TUTOR" Type="Self.TUTOR" Multiplicity="1" />
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUTOR">
+              <PropertyRef Name="ID_TUTOR" />
+            </Principal>
+            <Dependent Role="ALUMNO">
+              <PropertyRef Name="ID_TUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO_AC__ID_AC__56D3D912">
+          <End Role="ACTIVIDAD_HORARIO" Type="Self.ACTIVIDAD_HORARIO" Multiplicity="1" />
+          <End Role="ALUMNO_ACTIVIDAD" Type="Self.ALUMNO_ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_ACT_HORARIO" />
+            </Principal>
+            <Dependent Role="ALUMNO_ACTIVIDAD">
+              <PropertyRef Name="ID_ACT_HORARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO_AC__ID_AL__55DFB4D9">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="1" />
+          <End Role="ALUMNO_ACTIVIDAD" Type="Self.ALUMNO_ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="ID_ALUMNO" />
+            </Principal>
+            <Dependent Role="ALUMNO_ACTIVIDAD">
+              <PropertyRef Name="ID_ALUMNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_AM__10416098">
+          <End Role="AMPA" Type="Self.AMPA" Multiplicity="1" />
+          <End Role="CURSO_CLASE" Type="Self.CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_CL__0F4D3C5F">
+          <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+          <End Role="CURSO_CLASE" Type="Self.CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASE">
+              <PropertyRef Name="ID_CLASE" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CLASE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_CU__0E591826">
+          <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+          <End Role="CURSO_CLASE" Type="Self.CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="ID_CURSO" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CURSO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA_A__ID_AM__4B973090">
+          <End Role="AMPA" Type="Self.AMPA" Multiplicity="1" />
+          <End Role="EMPRESA_AMPA" Type="Self.EMPRESA_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="EMPRESA_AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA_A__ID_EM__4C8B54C9">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="EMPRESA_AMPA" Type="Self.EMPRESA_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="EMPRESA_AMPA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONITOR__ID_EMPR__000AF8CF">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="MONITOR" Type="Self.MONITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="MONITOR">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONITOR__ID_TIPO__00FF1D08">
+          <End Role="TIPO_DOCUMENTO" Type="Self.TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Role="MONITOR" Type="Self.MONITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="MONITOR">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__ID_AMPA__17E28260">
+          <End Role="AMPA" Type="Self.AMPA" Multiplicity="1" />
+          <End Role="TUTOR" Type="Self.TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__T1_ID_TIP__18D6A699">
+          <End Role="TIPO_DOCUMENTO" Type="Self.TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Role="TUTOR" Type="Self.TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="T1_ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__T2_ID_TIP__19CACAD2">
+          <End Role="TIPO_DOCUMENTO" Type="Self.TIPO_DOCUMENTO" Multiplicity="0..1" />
+          <End Role="TUTOR" Type="Self.TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="T2_ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_A__ID_AM__5708E33C">
+          <End Role="AMPA" Type="Self.AMPA" Multiplicity="1" />
+          <End Role="USUARIO_AMPA" Type="Self.USUARIO_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="USUARIO_AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_A__ID_TI__57FD0775">
+          <End Role="TIPO_DOCUMENTO" Type="Self.TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Role="USUARIO_AMPA" Type="Self.USUARIO_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="USUARIO_AMPA">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_E__ID_EM__5DB5E0CB">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO_EMPRESA" Type="Self.USUARIO_EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="USUARIO_EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_E__ID_TI__5EAA0504">
+          <End Role="TIPO_DOCUMENTO" Type="Self.TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Role="USUARIO_EMPRESA" Type="Self.USUARIO_EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="USUARIO_EMPRESA">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AMPAEXTModelStoreContainer">
+          <EntitySet Name="ACTIVIDAD" EntityType="Self.ACTIVIDAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACTIVIDAD_DESCUENTO" EntityType="Self.ACTIVIDAD_DESCUENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACTIVIDAD_HORARIO" EntityType="Self.ACTIVIDAD_HORARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALUMNO_ACTIVIDAD" EntityType="Self.ALUMNO_ACTIVIDAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AMPA" EntityType="Self.AMPA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLASE" EntityType="Self.CLASE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CURSO_CLASE" EntityType="Self.CURSO_CLASE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DESCUENTO" EntityType="Self.DESCUENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA_AMPA" EntityType="Self.EMPRESA_AMPA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MONITOR" EntityType="Self.MONITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_DOCUMENTO" EntityType="Self.TIPO_DOCUMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TUTOR" EntityType="Self.TUTOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_AMPA" EntityType="Self.USUARIO_AMPA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_EMPRESA" EntityType="Self.USUARIO_EMPRESA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AC__40E497F3" Association="Self.FK__ACTIVIDAD__ID_AC__40E497F3">
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AC__47919582" Association="Self.FK__ACTIVIDAD__ID_AC__47919582">
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+            <End Role="ACTIVIDAD_DESCUENTO" EntitySet="ACTIVIDAD_DESCUENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AM__3C1FE2D6" Association="Self.FK__ACTIVIDAD__ID_AM__3C1FE2D6">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_DE__4885B9BB" Association="Self.FK__ACTIVIDAD__ID_DE__4885B9BB">
+            <End Role="DESCUENTO" EntitySet="DESCUENTO" />
+            <End Role="ACTIVIDAD_DESCUENTO" EntitySet="ACTIVIDAD_DESCUENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_EM__3B2BBE9D" Association="Self.FK__ACTIVIDAD__ID_EM__3B2BBE9D">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_MO__41D8BC2C" Association="Self.FK__ACTIVIDAD__ID_MO__41D8BC2C">
+            <End Role="MONITOR" EntitySet="MONITOR" />
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO__ID_CURSO__520F23F5" Association="Self.FK__ALUMNO__ID_CURSO__520F23F5">
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO__ID_TUTOR__511AFFBC" Association="Self.FK__ALUMNO__ID_TUTOR__511AFFBC">
+            <End Role="TUTOR" EntitySet="TUTOR" />
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO_AC__ID_AC__56D3D912" Association="Self.FK__ALUMNO_AC__ID_AC__56D3D912">
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+            <End Role="ALUMNO_ACTIVIDAD" EntitySet="ALUMNO_ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO_AC__ID_AL__55DFB4D9" Association="Self.FK__ALUMNO_AC__ID_AL__55DFB4D9">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="ALUMNO_ACTIVIDAD" EntitySet="ALUMNO_ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_AM__10416098" Association="Self.FK__CURSO_CLA__ID_AM__10416098">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_CL__0F4D3C5F" Association="Self.FK__CURSO_CLA__ID_CL__0F4D3C5F">
+            <End Role="CLASE" EntitySet="CLASE" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_CU__0E591826" Association="Self.FK__CURSO_CLA__ID_CU__0E591826">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA_A__ID_AM__4B973090" Association="Self.FK__EMPRESA_A__ID_AM__4B973090">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="EMPRESA_AMPA" EntitySet="EMPRESA_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA_A__ID_EM__4C8B54C9" Association="Self.FK__EMPRESA_A__ID_EM__4C8B54C9">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="EMPRESA_AMPA" EntitySet="EMPRESA_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONITOR__ID_EMPR__000AF8CF" Association="Self.FK__MONITOR__ID_EMPR__000AF8CF">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="MONITOR" EntitySet="MONITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONITOR__ID_TIPO__00FF1D08" Association="Self.FK__MONITOR__ID_TIPO__00FF1D08">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="MONITOR" EntitySet="MONITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__ID_AMPA__17E28260" Association="Self.FK__TUTOR__ID_AMPA__17E28260">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__T1_ID_TIP__18D6A699" Association="Self.FK__TUTOR__T1_ID_TIP__18D6A699">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__T2_ID_TIP__19CACAD2" Association="Self.FK__TUTOR__T2_ID_TIP__19CACAD2">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_A__ID_AM__5708E33C" Association="Self.FK__USUARIO_A__ID_AM__5708E33C">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="USUARIO_AMPA" EntitySet="USUARIO_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_A__ID_TI__57FD0775" Association="Self.FK__USUARIO_A__ID_TI__57FD0775">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="USUARIO_AMPA" EntitySet="USUARIO_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_E__ID_EM__5DB5E0CB" Association="Self.FK__USUARIO_E__ID_EM__5DB5E0CB">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO_EMPRESA" EntitySet="USUARIO_EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_E__ID_TI__5EAA0504" Association="Self.FK__USUARIO_E__ID_TI__5EAA0504">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="USUARIO_EMPRESA" EntitySet="USUARIO_EMPRESA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AMPAEXTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AMPAEXTBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACTIVIDAD" EntityType="AMPAEXTModel.ACTIVIDAD" />
+          <EntitySet Name="ACTIVIDAD_DESCUENTO" EntityType="AMPAEXTModel.ACTIVIDAD_DESCUENTO" />
+          <EntitySet Name="ACTIVIDAD_HORARIO" EntityType="AMPAEXTModel.ACTIVIDAD_HORARIO" />
+          <EntitySet Name="ALUMNO" EntityType="AMPAEXTModel.ALUMNO" />
+          <EntitySet Name="ALUMNO_ACTIVIDAD" EntityType="AMPAEXTModel.ALUMNO_ACTIVIDAD" />
+          <EntitySet Name="AMPA" EntityType="AMPAEXTModel.AMPA" />
+          <EntitySet Name="CLASE" EntityType="AMPAEXTModel.CLASE" />
+          <EntitySet Name="CURSO" EntityType="AMPAEXTModel.CURSO" />
+          <EntitySet Name="CURSO_CLASE" EntityType="AMPAEXTModel.CURSO_CLASE" />
+          <EntitySet Name="DESCUENTO" EntityType="AMPAEXTModel.DESCUENTO" />
+          <EntitySet Name="EMPRESA" EntityType="AMPAEXTModel.EMPRESA" />
+          <EntitySet Name="EMPRESA_AMPA" EntityType="AMPAEXTModel.EMPRESA_AMPA" />
+          <EntitySet Name="MONITOR" EntityType="AMPAEXTModel.MONITOR" />
+          <EntitySet Name="TIPO_DOCUMENTO" EntityType="AMPAEXTModel.TIPO_DOCUMENTO" />
+          <EntitySet Name="TUTOR" EntityType="AMPAEXTModel.TUTOR" />
+          <EntitySet Name="USUARIO_AMPA" EntityType="AMPAEXTModel.USUARIO_AMPA" />
+          <EntitySet Name="USUARIO_EMPRESA" EntityType="AMPAEXTModel.USUARIO_EMPRESA" />
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AC__40E497F3" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__40E497F3">
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AC__47919582" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__47919582">
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+            <End Role="ACTIVIDAD_DESCUENTO" EntitySet="ACTIVIDAD_DESCUENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_AM__3C1FE2D6" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AM__3C1FE2D6">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_EM__3B2BBE9D" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_EM__3B2BBE9D">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="ACTIVIDAD" EntitySet="ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_DE__4885B9BB" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_DE__4885B9BB">
+            <End Role="DESCUENTO" EntitySet="DESCUENTO" />
+            <End Role="ACTIVIDAD_DESCUENTO" EntitySet="ACTIVIDAD_DESCUENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ACTIVIDAD__ID_MO__41D8BC2C" Association="AMPAEXTModel.FK__ACTIVIDAD__ID_MO__41D8BC2C">
+            <End Role="MONITOR" EntitySet="MONITOR" />
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO_AC__ID_AC__56D3D912" Association="AMPAEXTModel.FK__ALUMNO_AC__ID_AC__56D3D912">
+            <End Role="ACTIVIDAD_HORARIO" EntitySet="ACTIVIDAD_HORARIO" />
+            <End Role="ALUMNO_ACTIVIDAD" EntitySet="ALUMNO_ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO__ID_CURSO__520F23F5" Association="AMPAEXTModel.FK__ALUMNO__ID_CURSO__520F23F5">
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO__ID_TUTOR__511AFFBC" Association="AMPAEXTModel.FK__ALUMNO__ID_TUTOR__511AFFBC">
+            <End Role="TUTOR" EntitySet="TUTOR" />
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ALUMNO_AC__ID_AL__55DFB4D9" Association="AMPAEXTModel.FK__ALUMNO_AC__ID_AL__55DFB4D9">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="ALUMNO_ACTIVIDAD" EntitySet="ALUMNO_ACTIVIDAD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_AM__10416098" Association="AMPAEXTModel.FK__CURSO_CLA__ID_AM__10416098">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA_A__ID_AM__4B973090" Association="AMPAEXTModel.FK__EMPRESA_A__ID_AM__4B973090">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="EMPRESA_AMPA" EntitySet="EMPRESA_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__ID_AMPA__17E28260" Association="AMPAEXTModel.FK__TUTOR__ID_AMPA__17E28260">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_A__ID_AM__5708E33C" Association="AMPAEXTModel.FK__USUARIO_A__ID_AM__5708E33C">
+            <End Role="AMPA" EntitySet="AMPA" />
+            <End Role="USUARIO_AMPA" EntitySet="USUARIO_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_CL__0F4D3C5F" Association="AMPAEXTModel.FK__CURSO_CLA__ID_CL__0F4D3C5F">
+            <End Role="CLASE" EntitySet="CLASE" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CURSO_CLA__ID_CU__0E591826" Association="AMPAEXTModel.FK__CURSO_CLA__ID_CU__0E591826">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="CURSO_CLASE" EntitySet="CURSO_CLASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA_A__ID_EM__4C8B54C9" Association="AMPAEXTModel.FK__EMPRESA_A__ID_EM__4C8B54C9">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="EMPRESA_AMPA" EntitySet="EMPRESA_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONITOR__ID_EMPR__000AF8CF" Association="AMPAEXTModel.FK__MONITOR__ID_EMPR__000AF8CF">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="MONITOR" EntitySet="MONITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_E__ID_EM__5DB5E0CB" Association="AMPAEXTModel.FK__USUARIO_E__ID_EM__5DB5E0CB">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO_EMPRESA" EntitySet="USUARIO_EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONITOR__ID_TIPO__00FF1D08" Association="AMPAEXTModel.FK__MONITOR__ID_TIPO__00FF1D08">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="MONITOR" EntitySet="MONITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__T1_ID_TIP__18D6A699" Association="AMPAEXTModel.FK__TUTOR__T1_ID_TIP__18D6A699">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TUTOR__T2_ID_TIP__19CACAD2" Association="AMPAEXTModel.FK__TUTOR__T2_ID_TIP__19CACAD2">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="TUTOR" EntitySet="TUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_A__ID_TI__57FD0775" Association="AMPAEXTModel.FK__USUARIO_A__ID_TI__57FD0775">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="USUARIO_AMPA" EntitySet="USUARIO_AMPA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_E__ID_TI__5EAA0504" Association="AMPAEXTModel.FK__USUARIO_E__ID_TI__5EAA0504">
+            <End Role="TIPO_DOCUMENTO" EntitySet="TIPO_DOCUMENTO" />
+            <End Role="USUARIO_EMPRESA" EntitySet="USUARIO_EMPRESA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ACTIVIDAD">
+          <Key>
+            <PropertyRef Name="ID_ACTIVIDAD" />
+          </Key>
+          <Property Name="ID_ACTIVIDAD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACTIVIDAD_HORARIO" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__40E497F3" FromRole="ACTIVIDAD" ToRole="ACTIVIDAD_HORARIO" />
+          <NavigationProperty Name="ACTIVIDAD_DESCUENTO" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__47919582" FromRole="ACTIVIDAD" ToRole="ACTIVIDAD_DESCUENTO" />
+          <NavigationProperty Name="AMPA" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AM__3C1FE2D6" FromRole="ACTIVIDAD" ToRole="AMPA" />
+          <NavigationProperty Name="EMPRESA" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_EM__3B2BBE9D" FromRole="ACTIVIDAD" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_DESCUENTO">
+          <Key>
+            <PropertyRef Name="ID_ACT_DESCUENTO" />
+          </Key>
+          <Property Name="ID_ACT_DESCUENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ACTIVIDAD" Type="Int32" Nullable="false" />
+          <Property Name="ID_DESCUENTO" Type="Int32" Nullable="false" />
+          <Property Name="VALOR" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACTIVIDAD" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__47919582" FromRole="ACTIVIDAD_DESCUENTO" ToRole="ACTIVIDAD" />
+          <NavigationProperty Name="DESCUENTO" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_DE__4885B9BB" FromRole="ACTIVIDAD_DESCUENTO" ToRole="DESCUENTO" />
+        </EntityType>
+        <EntityType Name="ACTIVIDAD_HORARIO">
+          <Key>
+            <PropertyRef Name="ID_ACT_HORARIO" />
+          </Key>
+          <Property Name="ID_ACT_HORARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ACTIVIDAD" Type="Int32" Nullable="false" />
+          <Property Name="ID_MONITOR" Type="Int32" />
+          <Property Name="DIAS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HORA_INI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HORA_FIN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUOTA" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACTIVIDAD" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__40E497F3" FromRole="ACTIVIDAD_HORARIO" ToRole="ACTIVIDAD" />
+          <NavigationProperty Name="MONITOR" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_MO__41D8BC2C" FromRole="ACTIVIDAD_HORARIO" ToRole="MONITOR" />
+          <NavigationProperty Name="ALUMNO_ACTIVIDAD" Relationship="AMPAEXTModel.FK__ALUMNO_AC__ID_AC__56D3D912" FromRole="ACTIVIDAD_HORARIO" ToRole="ALUMNO_ACTIVIDAD" />
+        </EntityType>
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="ID_ALUMNO" />
+          </Key>
+          <Property Name="ID_ALUMNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TUTOR" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_NACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_CURSO_CLASE" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CURSO_CLASE" Relationship="AMPAEXTModel.FK__ALUMNO__ID_CURSO__520F23F5" FromRole="ALUMNO" ToRole="CURSO_CLASE" />
+          <NavigationProperty Name="TUTOR" Relationship="AMPAEXTModel.FK__ALUMNO__ID_TUTOR__511AFFBC" FromRole="ALUMNO" ToRole="TUTOR" />
+          <NavigationProperty Name="ALUMNO_ACTIVIDAD" Relationship="AMPAEXTModel.FK__ALUMNO_AC__ID_AL__55DFB4D9" FromRole="ALUMNO" ToRole="ALUMNO_ACTIVIDAD" />
+        </EntityType>
+        <EntityType Name="ALUMNO_ACTIVIDAD">
+          <Key>
+            <PropertyRef Name="ID_ALUM_ACT" />
+          </Key>
+          <Property Name="ID_ALUM_ACT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ALUMNO" Type="Int32" Nullable="false" />
+          <Property Name="ID_ACT_HORARIO" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ACTIVIDAD_HORARIO" Relationship="AMPAEXTModel.FK__ALUMNO_AC__ID_AC__56D3D912" FromRole="ALUMNO_ACTIVIDAD" ToRole="ACTIVIDAD_HORARIO" />
+          <NavigationProperty Name="ALUMNO" Relationship="AMPAEXTModel.FK__ALUMNO_AC__ID_AL__55DFB4D9" FromRole="ALUMNO_ACTIVIDAD" ToRole="ALUMNO" />
+        </EntityType>
+        <EntityType Name="AMPA">
+          <Key>
+            <PropertyRef Name="ID_AMPA" />
+          </Key>
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NIF" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ACTIVIDAD" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_AM__3C1FE2D6" FromRole="AMPA" ToRole="ACTIVIDAD" />
+          <NavigationProperty Name="CURSO_CLASE" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_AM__10416098" FromRole="AMPA" ToRole="CURSO_CLASE" />
+          <NavigationProperty Name="EMPRESA_AMPA" Relationship="AMPAEXTModel.FK__EMPRESA_A__ID_AM__4B973090" FromRole="AMPA" ToRole="EMPRESA_AMPA" />
+          <NavigationProperty Name="TUTOR" Relationship="AMPAEXTModel.FK__TUTOR__ID_AMPA__17E28260" FromRole="AMPA" ToRole="TUTOR" />
+          <NavigationProperty Name="USUARIO_AMPA" Relationship="AMPAEXTModel.FK__USUARIO_A__ID_AM__5708E33C" FromRole="AMPA" ToRole="USUARIO_AMPA" />
+        </EntityType>
+        <EntityType Name="CLASE">
+          <Key>
+            <PropertyRef Name="ID_CLASE" />
+          </Key>
+          <Property Name="ID_CLASE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CURSO_CLASE" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_CL__0F4D3C5F" FromRole="CLASE" ToRole="CURSO_CLASE" />
+        </EntityType>
+        <EntityType Name="CURSO">
+          <Key>
+            <PropertyRef Name="ID_CURSO" />
+          </Key>
+          <Property Name="ID_CURSO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CURSO_CLASE" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_CU__0E591826" FromRole="CURSO" ToRole="CURSO_CLASE" />
+        </EntityType>
+        <EntityType Name="CURSO_CLASE">
+          <Key>
+            <PropertyRef Name="ID_CURSO_CLASE" />
+          </Key>
+          <Property Name="ID_CURSO_CLASE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CURSO" Type="Int32" Nullable="false" />
+          <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ALUMNO" Relationship="AMPAEXTModel.FK__ALUMNO__ID_CURSO__520F23F5" FromRole="CURSO_CLASE" ToRole="ALUMNO" />
+          <NavigationProperty Name="AMPA" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_AM__10416098" FromRole="CURSO_CLASE" ToRole="AMPA" />
+          <NavigationProperty Name="CLASE" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_CL__0F4D3C5F" FromRole="CURSO_CLASE" ToRole="CLASE" />
+          <NavigationProperty Name="CURSO" Relationship="AMPAEXTModel.FK__CURSO_CLA__ID_CU__0E591826" FromRole="CURSO_CLASE" ToRole="CURSO" />
+        </EntityType>
+        <EntityType Name="DESCUENTO">
+          <Key>
+            <PropertyRef Name="ID_DESCUENTO" />
+          </Key>
+          <Property Name="ID_DESCUENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ACTIVIDAD_DESCUENTO" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_DE__4885B9BB" FromRole="DESCUENTO" ToRole="ACTIVIDAD_DESCUENTO" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIF" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RAZON_SOCIAL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PAGINA_WEB" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="USUARIO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="ACTIVIDAD" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_EM__3B2BBE9D" FromRole="EMPRESA" ToRole="ACTIVIDAD" />
+          <NavigationProperty Name="EMPRESA_AMPA" Relationship="AMPAEXTModel.FK__EMPRESA_A__ID_EM__4C8B54C9" FromRole="EMPRESA" ToRole="EMPRESA_AMPA" />
+          <NavigationProperty Name="MONITOR" Relationship="AMPAEXTModel.FK__MONITOR__ID_EMPR__000AF8CF" FromRole="EMPRESA" ToRole="MONITOR" />
+          <NavigationProperty Name="USUARIO_EMPRESA" Relationship="AMPAEXTModel.FK__USUARIO_E__ID_EM__5DB5E0CB" FromRole="EMPRESA" ToRole="USUARIO_EMPRESA" />
+        </EntityType>
+        <EntityType Name="EMPRESA_AMPA">
+          <Key>
+            <PropertyRef Name="ID_AMPA" />
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ACTIVO" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="MOTIVO_BAJA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AMPA" Relationship="AMPAEXTModel.FK__EMPRESA_A__ID_AM__4B973090" FromRole="EMPRESA_AMPA" ToRole="AMPA" />
+          <NavigationProperty Name="EMPRESA" Relationship="AMPAEXTModel.FK__EMPRESA_A__ID_EM__4C8B54C9" FromRole="EMPRESA_AMPA" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="MONITOR">
+          <Key>
+            <PropertyRef Name="ID_MONITOR" />
+          </Key>
+          <Property Name="ID_MONITOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOGIN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ACTIVIDAD_HORARIO" Relationship="AMPAEXTModel.FK__ACTIVIDAD__ID_MO__41D8BC2C" FromRole="MONITOR" ToRole="ACTIVIDAD_HORARIO" />
+          <NavigationProperty Name="EMPRESA" Relationship="AMPAEXTModel.FK__MONITOR__ID_EMPR__000AF8CF" FromRole="MONITOR" ToRole="EMPRESA" />
+          <NavigationProperty Name="TIPO_DOCUMENTO" Relationship="AMPAEXTModel.FK__MONITOR__ID_TIPO__00FF1D08" FromRole="MONITOR" ToRole="TIPO_DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="TIPO_DOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MONITOR" Relationship="AMPAEXTModel.FK__MONITOR__ID_TIPO__00FF1D08" FromRole="TIPO_DOCUMENTO" ToRole="MONITOR" />
+          <NavigationProperty Name="TUTOR" Relationship="AMPAEXTModel.FK__TUTOR__T1_ID_TIP__18D6A699" FromRole="TIPO_DOCUMENTO" ToRole="TUTOR" />
+          <NavigationProperty Name="TUTOR1" Relationship="AMPAEXTModel.FK__TUTOR__T2_ID_TIP__19CACAD2" FromRole="TIPO_DOCUMENTO" ToRole="TUTOR" />
+          <NavigationProperty Name="USUARIO_AMPA" Relationship="AMPAEXTModel.FK__USUARIO_A__ID_TI__57FD0775" FromRole="TIPO_DOCUMENTO" ToRole="USUARIO_AMPA" />
+          <NavigationProperty Name="USUARIO_EMPRESA" Relationship="AMPAEXTModel.FK__USUARIO_E__ID_TI__5EAA0504" FromRole="TIPO_DOCUMENTO" ToRole="USUARIO_EMPRESA" />
+        </EntityType>
+        <EntityType Name="TUTOR">
+          <Key>
+            <PropertyRef Name="ID_TUTOR" />
+          </Key>
+          <Property Name="ID_TUTOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" />
+          <Property Name="T1_ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="T1_NUMERO_DOCUMENTO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T1_NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T1_APELLIDO1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T1_APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T1_EMAIL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="T1_TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="T2_ID_TIPO_DOCUMENTO" Type="Int32" />
+          <Property Name="T2_NUMERO_DOCUMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T2_NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T2_APELLIDO1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T2_APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="T2_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="T2_TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="INDIVIDUAL" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ALUMNO" Relationship="AMPAEXTModel.FK__ALUMNO__ID_TUTOR__511AFFBC" FromRole="TUTOR" ToRole="ALUMNO" />
+          <NavigationProperty Name="AMPA" Relationship="AMPAEXTModel.FK__TUTOR__ID_AMPA__17E28260" FromRole="TUTOR" ToRole="AMPA" />
+          <NavigationProperty Name="TIPO_DOCUMENTO" Relationship="AMPAEXTModel.FK__TUTOR__T1_ID_TIP__18D6A699" FromRole="TUTOR" ToRole="TIPO_DOCUMENTO" />
+          <NavigationProperty Name="TIPO_DOCUMENTO1" Relationship="AMPAEXTModel.FK__TUTOR__T2_ID_TIP__19CACAD2" FromRole="TUTOR" ToRole="TIPO_DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="USUARIO_AMPA">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_AMPA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOGIN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AMPA" Relationship="AMPAEXTModel.FK__USUARIO_A__ID_AM__5708E33C" FromRole="USUARIO_AMPA" ToRole="AMPA" />
+          <NavigationProperty Name="TIPO_DOCUMENTO" Relationship="AMPAEXTModel.FK__USUARIO_A__ID_TI__57FD0775" FromRole="USUARIO_AMPA" ToRole="TIPO_DOCUMENTO" />
+        </EntityType>
+        <EntityType Name="USUARIO_EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_USUARIO_EMP" />
+          </Key>
+          <Property Name="ID_USUARIO_EMP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_DOCUMENTO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOGIN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="FECHA_MOD" Type="DateTime" Precision="7" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="AMPAEXTModel.FK__USUARIO_E__ID_EM__5DB5E0CB" FromRole="USUARIO_EMPRESA" ToRole="EMPRESA" />
+          <NavigationProperty Name="TIPO_DOCUMENTO" Relationship="AMPAEXTModel.FK__USUARIO_E__ID_TI__5EAA0504" FromRole="USUARIO_EMPRESA" ToRole="TIPO_DOCUMENTO" />
+        </EntityType>
+        <Association Name="FK__ACTIVIDAD__ID_AC__40E497F3">
+          <End Type="AMPAEXTModel.ACTIVIDAD" Role="ACTIVIDAD" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD_HORARIO" Role="ACTIVIDAD_HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_AC__47919582">
+          <End Type="AMPAEXTModel.ACTIVIDAD" Role="ACTIVIDAD" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD_DESCUENTO" Role="ACTIVIDAD_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_DESCUENTO">
+              <PropertyRef Name="ID_ACTIVIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_AM__3C1FE2D6">
+          <End Type="AMPAEXTModel.AMPA" Role="AMPA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD" Role="ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_EM__3B2BBE9D">
+          <End Type="AMPAEXTModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD" Role="ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_DE__4885B9BB">
+          <End Type="AMPAEXTModel.DESCUENTO" Role="DESCUENTO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD_DESCUENTO" Role="ACTIVIDAD_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DESCUENTO">
+              <PropertyRef Name="ID_DESCUENTO" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_DESCUENTO">
+              <PropertyRef Name="ID_DESCUENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ACTIVIDAD__ID_MO__41D8BC2C">
+          <End Type="AMPAEXTModel.MONITOR" Role="MONITOR" Multiplicity="0..1" />
+          <End Type="AMPAEXTModel.ACTIVIDAD_HORARIO" Role="ACTIVIDAD_HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONITOR">
+              <PropertyRef Name="ID_MONITOR" />
+            </Principal>
+            <Dependent Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_MONITOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO_AC__ID_AC__56D3D912">
+          <End Type="AMPAEXTModel.ACTIVIDAD_HORARIO" Role="ACTIVIDAD_HORARIO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ALUMNO_ACTIVIDAD" Role="ALUMNO_ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVIDAD_HORARIO">
+              <PropertyRef Name="ID_ACT_HORARIO" />
+            </Principal>
+            <Dependent Role="ALUMNO_ACTIVIDAD">
+              <PropertyRef Name="ID_ACT_HORARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO__ID_CURSO__520F23F5">
+          <End Type="AMPAEXTModel.CURSO_CLASE" Role="CURSO_CLASE" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ALUMNO" Role="ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CURSO_CLASE" />
+            </Principal>
+            <Dependent Role="ALUMNO">
+              <PropertyRef Name="ID_CURSO_CLASE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO__ID_TUTOR__511AFFBC">
+          <End Type="AMPAEXTModel.TUTOR" Role="TUTOR" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ALUMNO" Role="ALUMNO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUTOR">
+              <PropertyRef Name="ID_TUTOR" />
+            </Principal>
+            <Dependent Role="ALUMNO">
+              <PropertyRef Name="ID_TUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ALUMNO_AC__ID_AL__55DFB4D9">
+          <End Type="AMPAEXTModel.ALUMNO" Role="ALUMNO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.ALUMNO_ACTIVIDAD" Role="ALUMNO_ACTIVIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="ID_ALUMNO" />
+            </Principal>
+            <Dependent Role="ALUMNO_ACTIVIDAD">
+              <PropertyRef Name="ID_ALUMNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_AM__10416098">
+          <End Type="AMPAEXTModel.AMPA" Role="AMPA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.CURSO_CLASE" Role="CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA_A__ID_AM__4B973090">
+          <End Type="AMPAEXTModel.AMPA" Role="AMPA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.EMPRESA_AMPA" Role="EMPRESA_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="EMPRESA_AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__ID_AMPA__17E28260">
+          <End Type="AMPAEXTModel.AMPA" Role="AMPA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.TUTOR" Role="TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_A__ID_AM__5708E33C">
+          <End Type="AMPAEXTModel.AMPA" Role="AMPA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.USUARIO_AMPA" Role="USUARIO_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Principal>
+            <Dependent Role="USUARIO_AMPA">
+              <PropertyRef Name="ID_AMPA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_CL__0F4D3C5F">
+          <End Type="AMPAEXTModel.CLASE" Role="CLASE" Multiplicity="1" />
+          <End Type="AMPAEXTModel.CURSO_CLASE" Role="CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASE">
+              <PropertyRef Name="ID_CLASE" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CLASE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CURSO_CLA__ID_CU__0E591826">
+          <End Type="AMPAEXTModel.CURSO" Role="CURSO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.CURSO_CLASE" Role="CURSO_CLASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="ID_CURSO" />
+            </Principal>
+            <Dependent Role="CURSO_CLASE">
+              <PropertyRef Name="ID_CURSO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA_A__ID_EM__4C8B54C9">
+          <End Type="AMPAEXTModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.EMPRESA_AMPA" Role="EMPRESA_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="EMPRESA_AMPA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONITOR__ID_EMPR__000AF8CF">
+          <End Type="AMPAEXTModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.MONITOR" Role="MONITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="MONITOR">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_E__ID_EM__5DB5E0CB">
+          <End Type="AMPAEXTModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="AMPAEXTModel.USUARIO_EMPRESA" Role="USUARIO_EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="USUARIO_EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONITOR__ID_TIPO__00FF1D08">
+          <End Type="AMPAEXTModel.TIPO_DOCUMENTO" Role="TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.MONITOR" Role="MONITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="MONITOR">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__T1_ID_TIP__18D6A699">
+          <End Type="AMPAEXTModel.TIPO_DOCUMENTO" Role="TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.TUTOR" Role="TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="T1_ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TUTOR__T2_ID_TIP__19CACAD2">
+          <End Type="AMPAEXTModel.TIPO_DOCUMENTO" Role="TIPO_DOCUMENTO" Multiplicity="0..1" />
+          <End Type="AMPAEXTModel.TUTOR" Role="TUTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="TUTOR">
+              <PropertyRef Name="T2_ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_A__ID_TI__57FD0775">
+          <End Type="AMPAEXTModel.TIPO_DOCUMENTO" Role="TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.USUARIO_AMPA" Role="USUARIO_AMPA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="USUARIO_AMPA">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_E__ID_TI__5EAA0504">
+          <End Type="AMPAEXTModel.TIPO_DOCUMENTO" Role="TIPO_DOCUMENTO" Multiplicity="1" />
+          <End Type="AMPAEXTModel.USUARIO_EMPRESA" Role="USUARIO_EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOCUMENTO">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="USUARIO_EMPRESA">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AMPAEXTModelStoreContainer" CdmEntityContainer="AMPAEXTBD">
+          <EntitySetMapping Name="ACTIVIDAD">
+            <EntityTypeMapping TypeName="AMPAEXTModel.ACTIVIDAD">
+              <MappingFragment StoreEntitySet="ACTIVIDAD">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_ACTIVIDAD" ColumnName="ID_ACTIVIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTIVIDAD_DESCUENTO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.ACTIVIDAD_DESCUENTO">
+              <MappingFragment StoreEntitySet="ACTIVIDAD_DESCUENTO">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="ID_DESCUENTO" ColumnName="ID_DESCUENTO" />
+                <ScalarProperty Name="ID_ACTIVIDAD" ColumnName="ID_ACTIVIDAD" />
+                <ScalarProperty Name="ID_ACT_DESCUENTO" ColumnName="ID_ACT_DESCUENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTIVIDAD_HORARIO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.ACTIVIDAD_HORARIO">
+              <MappingFragment StoreEntitySet="ACTIVIDAD_HORARIO">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CUOTA" ColumnName="CUOTA" />
+                <ScalarProperty Name="HORA_FIN" ColumnName="HORA_FIN" />
+                <ScalarProperty Name="HORA_INI" ColumnName="HORA_INI" />
+                <ScalarProperty Name="DIAS" ColumnName="DIAS" />
+                <ScalarProperty Name="ID_MONITOR" ColumnName="ID_MONITOR" />
+                <ScalarProperty Name="ID_ACTIVIDAD" ColumnName="ID_ACTIVIDAD" />
+                <ScalarProperty Name="ID_ACT_HORARIO" ColumnName="ID_ACT_HORARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALUMNO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.ALUMNO">
+              <MappingFragment StoreEntitySet="ALUMNO">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_CURSO_CLASE" ColumnName="ID_CURSO_CLASE" />
+                <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_TUTOR" ColumnName="ID_TUTOR" />
+                <ScalarProperty Name="ID_ALUMNO" ColumnName="ID_ALUMNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALUMNO_ACTIVIDAD">
+            <EntityTypeMapping TypeName="AMPAEXTModel.ALUMNO_ACTIVIDAD">
+              <MappingFragment StoreEntitySet="ALUMNO_ACTIVIDAD">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_ACT_HORARIO" ColumnName="ID_ACT_HORARIO" />
+                <ScalarProperty Name="ID_ALUMNO" ColumnName="ID_ALUMNO" />
+                <ScalarProperty Name="ID_ALUM_ACT" ColumnName="ID_ALUM_ACT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AMPA">
+            <EntityTypeMapping TypeName="AMPAEXTModel.AMPA">
+              <MappingFragment StoreEntitySet="AMPA">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="NIF" ColumnName="NIF" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLASE">
+            <EntityTypeMapping TypeName="AMPAEXTModel.CLASE">
+              <MappingFragment StoreEntitySet="CLASE">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CURSO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.CURSO">
+              <MappingFragment StoreEntitySet="CURSO">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_CURSO" ColumnName="ID_CURSO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CURSO_CLASE">
+            <EntityTypeMapping TypeName="AMPAEXTModel.CURSO_CLASE">
+              <MappingFragment StoreEntitySet="CURSO_CLASE">
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+                <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+                <ScalarProperty Name="ID_CURSO" ColumnName="ID_CURSO" />
+                <ScalarProperty Name="ID_CURSO_CLASE" ColumnName="ID_CURSO_CLASE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DESCUENTO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.DESCUENTO">
+              <MappingFragment StoreEntitySet="DESCUENTO">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_DESCUENTO" ColumnName="ID_DESCUENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="AMPAEXTModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="PAGINA_WEB" ColumnName="PAGINA_WEB" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NIF" ColumnName="NIF" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA_AMPA">
+            <EntityTypeMapping TypeName="AMPAEXTModel.EMPRESA_AMPA">
+              <MappingFragment StoreEntitySet="EMPRESA_AMPA">
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="MOTIVO_BAJA" ColumnName="MOTIVO_BAJA" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONITOR">
+            <EntityTypeMapping TypeName="AMPAEXTModel.MONITOR">
+              <MappingFragment StoreEntitySet="MONITOR">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NUMERO_DOCUMENTO" ColumnName="NUMERO_DOCUMENTO" />
+                <ScalarProperty Name="ID_TIPO_DOCUMENTO" ColumnName="ID_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_MONITOR" ColumnName="ID_MONITOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_DOCUMENTO">
+            <EntityTypeMapping TypeName="AMPAEXTModel.TIPO_DOCUMENTO">
+              <MappingFragment StoreEntitySet="TIPO_DOCUMENTO">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_TIPO_DOCUMENTO" ColumnName="ID_TIPO_DOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TUTOR">
+            <EntityTypeMapping TypeName="AMPAEXTModel.TUTOR">
+              <MappingFragment StoreEntitySet="TUTOR">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="INDIVIDUAL" ColumnName="INDIVIDUAL" />
+                <ScalarProperty Name="T2_TELEFONO" ColumnName="T2_TELEFONO" />
+                <ScalarProperty Name="T2_EMAIL" ColumnName="T2_EMAIL" />
+                <ScalarProperty Name="T2_APELLIDO2" ColumnName="T2_APELLIDO2" />
+                <ScalarProperty Name="T2_APELLIDO1" ColumnName="T2_APELLIDO1" />
+                <ScalarProperty Name="T2_NOMBRE" ColumnName="T2_NOMBRE" />
+                <ScalarProperty Name="T2_NUMERO_DOCUMENTO" ColumnName="T2_NUMERO_DOCUMENTO" />
+                <ScalarProperty Name="T2_ID_TIPO_DOCUMENTO" ColumnName="T2_ID_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="T1_TELEFONO" ColumnName="T1_TELEFONO" />
+                <ScalarProperty Name="T1_EMAIL" ColumnName="T1_EMAIL" />
+                <ScalarProperty Name="T1_APELLIDO2" ColumnName="T1_APELLIDO2" />
+                <ScalarProperty Name="T1_APELLIDO1" ColumnName="T1_APELLIDO1" />
+                <ScalarProperty Name="T1_NOMBRE" ColumnName="T1_NOMBRE" />
+                <ScalarProperty Name="T1_NUMERO_DOCUMENTO" ColumnName="T1_NUMERO_DOCUMENTO" />
+                <ScalarProperty Name="T1_ID_TIPO_DOCUMENTO" ColumnName="T1_ID_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+                <ScalarProperty Name="ID_TUTOR" ColumnName="ID_TUTOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_AMPA">
+            <EntityTypeMapping TypeName="AMPAEXTModel.USUARIO_AMPA">
+              <MappingFragment StoreEntitySet="USUARIO_AMPA">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NUMERO_DOCUMENTO" ColumnName="NUMERO_DOCUMENTO" />
+                <ScalarProperty Name="ID_TIPO_DOCUMENTO" ColumnName="ID_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="ID_AMPA" ColumnName="ID_AMPA" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_EMPRESA">
+            <EntityTypeMapping TypeName="AMPAEXTModel.USUARIO_EMPRESA">
+              <MappingFragment StoreEntitySet="USUARIO_EMPRESA">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NUMERO_DOCUMENTO" ColumnName="NUMERO_DOCUMENTO" />
+                <ScalarProperty Name="ID_TIPO_DOCUMENTO" ColumnName="ID_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_USUARIO_EMP" ColumnName="ID_USUARIO_EMP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

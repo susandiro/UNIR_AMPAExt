@@ -1,0 +1,456 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Principal.master.cs" Inherits="Masters_principal" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES" xml:lang="es-ES">
+
+<head runat="server">
+    <title>Sede Electrónica del Ministerio</title>
+    <base target="_self" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <%-- CSS's --%>
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <%--<link runat="server" rel="stylesheet" type="text/css" href="~/Content/bootstrap-datepicker.min.css" />--%>
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/jquery-ui.min.css" />
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/jquery-ui.structure.min.css" />
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/jquery-ui.theme.min.css" />
+    <%--<link runat="server" rel="stylesheet" type="text/css" href="~/Content/SedeElectronica.css" />--%>
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/custom.css" />
+    <link runat="server" rel="stylesheet" type="text/css" href="~/CSS/estilosRAEE.css" />
+    <%-- CSS's --%>
+    <link rel="stylesheet" type="text/css" href="https://sedeaplicaciones.minetur.gob.es/EstilosSedeElectronica/Style Library/SedeElectronica.css" />
+    <link rel="stylesheet" type="text/css" href="https://sedeaplicaciones.minetur.gob.es/EstilosSedeElectronica/Style Library/SedeElectronica_print.css" media="print" />
+    <link rel="shortcut icon" href="https://sedeaplicaciones.minetur.gob.es/EstilosSedeElectronica/SiteCollectionImages/SedeElectronica/favicon.ico" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <script type="text/javascript">
+        function redimensionar() {
+            //$("#main_container").height($(window).height() - 50);
+            //$(".anchoCompleto").height($(window).height() - 80 - $("#header").height() - $("#footer").height());
+            $("#divPlaceHolder").width($("#cabecera").width() - $("#columnaMenu").width() - 63);
+            var altoTotal = $("#divPlaceHolder").height() + $("#header").height() + $("#footer").height() + $("#footer").height() + 10;
+            $('#<%=fondoGris.ClientID %>').height(altoTotal);
+        }
+    </script>
+    <script type="text/javascript">
+        function CerrarMensajeError() {
+            $('#panelErrorFlotante').hide(600);
+            $('#<%=fondoGris.ClientID %>').hide(0);
+            redimensionar();
+        }
+        function AbrirMensajeError(titulo, mensaje, tipo) {
+            AbrirMensajeError(titulo, mensaje, tipo, '');
+        }
+
+        function AbrirMensajeError(titulo, mensaje, tipo, url) {
+            AbrirMensajeError(titulo, mensaje, tipo, url, '');
+        }
+        function AbrirMensajeError(titulo, mensaje, tipo, url, tam) {
+            if (tipo == 'danger') {
+                $('#panelErrorFlotante').removeClass("panel-success");
+                $('#panelErrorFlotante').removeClass("panel-warning");
+                $('#panelErrorFlotante').addClass("panel-danger");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("success");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("warning");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').addClass("error");
+                $('#buttonCerrarAlert').removeClass("btn-success");
+                $('#buttonCerrarAlert').removeClass("btn-warning");
+                $('#buttonCerrarAlert').addClass("btn-danger");
+            }
+            else if (tipo == 'warning') {
+                $('#panelErrorFlotante').removeClass("panel-success");
+                $('#panelErrorFlotante').addClass("panel-warning");
+                $('#panelErrorFlotante').removeClass("panel-danger");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("success");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').addClass("warning");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("error");
+                $('#buttonCerrarAlert').removeClass("btn-success");
+                $('#buttonCerrarAlert').addClass("btn-warning");
+                $('#buttonCerrarAlert').removeClass("btn-danger");
+            }
+            else if (tipo == 'success') {
+                $('#panelErrorFlotante').addClass("panel-success");
+                $('#panelErrorFlotante').removeClass("panel-warning");
+                $('#panelErrorFlotante').removeClass("panel-danger");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').addClass("success");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("warning");
+                $('#<%=lblErrorMensajeMaster.ClientID %>').removeClass("error");
+                $('#buttonCerrarAlert').addClass("btn-success");
+                $('#buttonCerrarAlert').removeClass("btn-warning");
+                $('#buttonCerrarAlert').removeClass("btn-danger");
+            }
+
+    if (tam == 'lg') {
+        $('#panelErrorFlotante').addClass("panelErrorFlotantelg");
+        $('#panelErrorFlotante').removeClass("panelErrorFlotante");
+    } else {
+        $('#panelErrorFlotante').addClass("panelErrorFlotante");
+        $('#panelErrorFlotante').removeClass("panelErrorFlotantelg");
+    }
+    if (url != '')
+        $('#buttonCerrarAlert').click(function () {
+            CerrarMensajeError();
+            $(location).attr('href', url);
+
+        });
+
+    $('#<%=lblErrorTitleMaster.ClientID %>').text(titulo);
+    $('#<%=lblErrorMensajeMaster.ClientID %>').text(mensaje);
+            $('#<%=fondoGris.ClientID %>').show(0);
+            $('#panelErrorFlotante').show(600);
+            redimensionar();
+        }
+        function LoadModal() {
+            document.getElementById('UpdateProgress1').style.display = 'block';
+            document.getElementById('relojProgress1').style.display = 'block';
+        }
+
+        function UnLoadModal() {
+            document.getElementById('UpdateProgress1').style.display = 'none';
+            document.getElementById('relojProgress1').style.display = 'none';
+        }
+
+        function Desconexion() {
+            window.document.getElementById('<%= btnDesconexion.ClientID %>').click();
+        }
+
+    </script>
+</head>
+
+<body class="<%=bodyClass%>" style="overflow: auto">
+
+
+    <div id="fondoGris" runat="server" class="fondoGris"></div>
+    <div id="panelErrorFlotante" class="panel panel-danger  panelErrorFlotante">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <asp:Label ID="lblErrorTitleMaster" runat="server" Text="Atención"></asp:Label>
+            </h3>
+        </div>
+        <div class="panel-body" style="width: 100%; height: 80%;">
+            <asp:Label ID="lblErrorMensajeMaster" runat="server" CssClass="error" Style="font-weight: bold" Text="Ha ocurrido un error."></asp:Label>
+            <div style="width: 100%; text-align: center; position: absolute; bottom: 5px; margin-left: -15px">
+                <input id="buttonCerrarAlert" type="button" class="btn btn-danger" title="Cerrar ventana" value="Cerrar" onclick="javascript: CerrarMensajeError()" />
+            </div>
+
+        </div>
+    </div>
+
+    <div id="main_container" style="width: 100%; max-width: 1198px; margin-top: 10px; min-width: 1000px">
+        <form id="formone" runat="server">
+            <div id="cabecera" style="height: 148px">
+                <div id="header" runat="server">
+                    <div class="logo">
+                        <a href="http://minetur.gob.es">
+                            <img src="https://sedeaplicaciones.minetur.gob.es/EstilosSedeElectronica/SiteCollectionImages/SedeElectronica/logo-ministerio.png" alt="ir al Ministerio de Industria, Comercio y Turismo" /></a>
+                        <img src="https://sedeaplicaciones.minetur.gob.es/EstilosSedeElectronica/SiteCollectionImages/SedeElectronica/<%=logoSede%>" alt="Sede Electrónica del Ministerio" title="Sede Electrónica del Ministerio" />
+                    </div>
+                    <div class="titulo-app" style="background-image: none; width: auto; padding-right: 100px">
+                        <h1 style="font-size: 12px; padding: 0px; font-family: Arial, Helvetica, sans-serif;">
+                            <asp:Label runat="server" ID="masterTitle"></asp:Label></h1>
+
+                    </div>
+                </div>
+                <div class="menu" id="dvBotonera" runat="server" style="background-size: 100% 100%, auto;">
+                    <ul class="herramientas">
+                        <li class="home">
+                            <asp:HyperLink runat="server" NavigateUrl="~/Index.aspx" ToolTip="Inicio">Inicio</asp:HyperLink></li>
+                        <li class="info">
+                            <a title="Acerca de" id="lnkInformacion" data-toggle="modal" data-target="#mdInformacion">Acerca de</a>
+                        </li>
+                        <li class="print"><a href="#" title="Imprimir" onclick="window.print();return false;">Imprimir</a></li>
+                        <li class="requisitos">
+                            <asp:HyperLink ID="manualDocumentacion" runat="server" ToolTip="Manual de usuario" NavigateUrl="~/Content/Manuales/Manual Usuario RII-AEE. Gestión SCRAP.pdf" Target="_blank"></asp:HyperLink>
+                        </li>
+                        <li class="salir">
+                            <a id="aLogout" href="#" onclick="Desconexion();return false;" runat="server" title="Desconectar" alt="Desconectar">Desconectar</a>
+                            <asp:Button ID="btnDesconexion" runat="server" Text="Button" Style="display: none;"
+                                OnClick="Desconectar" /></li>
+                    </ul>
+                    <div class="tt-usuario">
+                        <asp:Literal ID="usuarioLogado" runat="server"></asp:Literal>
+                    </div>
+                </div>
+                <div class="menu" id="dvBotoneraVacia" runat="server" visible="false" style="background-size: 100% 100%, auto;">
+                    <ul class="herramientas">
+                        <li class="info"><a title="Acerca de" id="lnkInformacion2" data-toggle="modal" data-target="#mdInformacion">Acerca de</a></li>
+                        <li class="requisitos" id="Documentacion" runat="server">
+                            <asp:HyperLink ID="manualDocumentacionSinLogin" runat="server" ToolTip="Manual de usuario" Target="_blank"></asp:HyperLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    <Scripts>
+                        <asp:ScriptReference Path="~/Scripts/jquery-2.2.1.min.js" />
+                        <asp:ScriptReference Path="~/Scripts/bootstrap.min.js" />
+                        <asp:ScriptReference Path="~/Scripts/jquery-ui-1.11.4.min.js" />
+                        <asp:ScriptReference Path="~/Scripts/Validaciones.js" />
+                        <asp:ScriptReference Path="~/Scripts/modernizr.custom.42568.js" />
+                    </Scripts>
+                </asp:ScriptManager>
+
+                <style type="text/css">
+                    #UpdateProgress1 {
+                        /*background: gray;*/
+                        z-index: 99;
+                        width: 100%;
+                        height: 100%;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+                        filter: alpha(opacity=70);
+                        -moz-opacity: 0.7;
+                        -khtml-opacity: 0.7;
+                        opacity: 0.7;
+                    }
+
+                    .relojEspere {
+                        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                        filter: alpha(opacity=100);
+                        -moz-opacity: 1;
+                        -khtml-opacity: 1;
+                        opacity: 1;
+                    }
+                </style>
+                <div class="center_content" style="height: 100%; min-height: 650px">
+                    <div id="columnaMenu" runat="server" class="center_columna anchoCompleto hidden-xs" style="height: 100%; overflow: auto;">
+                        <div class="menu-lateral" id="dvMenu" runat="server">
+                            <div class="industria" id="accordian">
+                                <ul>
+                                    <asp:Repeater runat="server" ID="menu" DataSourceID="SiteMapDataSource1">
+                                        <ItemTemplate>
+                                            <li style='<%# (Eval("Perfiles").ToString().Contains(DatosSesionLogin.PerfilesWAuth))?"": "display:none" %>'>
+                                                <span id="<%# Eval("Title") %>"><%# Eval("Title") + GetNumPendientes((bool)Eval("Administracion")) %></span>
+                                                <asp:Repeater runat="server" DataSource='<%# ((SiteMapNode) Container.DataItem).ChildNodes %>'>
+                                                    <HeaderTemplate>
+                                                        <ul>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <li style='<%# (Eval("Perfiles").ToString().Contains(DatosSesionLogin.PerfilesWAuth))?"": "display:none" %>'>
+                                                            <asp:HyperLink runat="server" CssClass="linkLoading" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") + GetNumPendientes((bool)Eval("GestorTareas")) %></asp:HyperLink>
+                                                        </li>
+                                                    </ItemTemplate>
+                                                    <FooterTemplate></ul></FooterTemplate>
+                                                </asp:Repeater>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </div>
+                            <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="false" />
+                        </div>
+                    </div>
+                    <div runat="server" id="divPlaceHolder" class="center_left " style="padding: 20px; overflow-y: auto; width: 100%; padding-bottom: 0px; min-height: 650px">
+                        <div class="migapan" id="dvRastroMigas" runat="server">
+                            <div class="caminodehormigas">
+                                <asp:SiteMapPath runat="server" ID="siteMapPath2" SiteMapProvider="SiteMap" CssClass="txtRuta">
+                                </asp:SiteMapPath>
+                            </div>
+                        </div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                        <div id='UpdateProgress1' class="reloj" style='display: none; margin: auto auto auto auto;'>
+                        </div>
+                        <div id='relojProgress1' class="relojImg relojEspere" style='display: none; margin: auto auto auto auto; z-index: 99'>
+                            <p>Espere por favor...</p>
+                        </div>
+                        <asp:UpdateProgress ID="uProgress" runat="server" DisplayAfter="0">
+                            <ProgressTemplate>
+                                <div class="reloj"></div>
+                                <div class="relojImg">
+                                    <p style="font-size: 1.2em; padding-bottom: 0;">Espere por favor...</p>
+                                    <div title="Espere por favor..."></div>
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+
+                    </div>
+                    <asp:UpdatePanel ID="upOcionMenu" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="btnCargarOpcion" ClientIDMode="Static" runat="server" Style="display: none;" Text="Cargar" OnClick="btnCargarOpcion_Click" />
+                            <input type="hidden" runat="server" clientidmode="Static" id="menuActivo" value="menu" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="container" style="width: 50%">
+                    <div class="modal" id="mdInformacion" role="dialog">
+                        <div class="modal-dialog ">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <asp:Panel runat="server">
+                                    <div class="modal-header colorEstandar" style="border: 0px !important; height: 60px;">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <p class="panel-title"><%=NombreAplicacion%> - Acerca de</p>
+                                    </div>
+                                    <div class="modal-body" style="margin: 10px; text-align: justify">
+
+                                        <h1><%=NombreAplicacionLargo%></h1>
+                                        <h2>Ministerio de Industria, Comercio y Turismo</h2>
+                                        Subdirección General de Tecnologías de la Información y Comunicaciones
+                                        <p>S.G. DE CALIDAD Y SEGURIDAD INDUSTRIAL</p>
+                                        <p>
+                                            Versión:
+                                            <asp:Label ID="lbCodeVersion" runat="server"></asp:Label>
+                                            <br />
+                                            Fecha última actualización:
+                                            <asp:Label ID="lbFechaAct" runat="server"></asp:Label>
+                                        </p>
+                                        <h2>Requisitos del Sistema</h2>
+                                        <p><%=NombreAplicacion%> es un sistema que utiliza tecnologías de seguridad que posibilitan la autenticación de los usuarios. Los usuarios se identifican ante el sistema a través de Cl@ve, certificado digital o mediante validación de usuario y contraseña.</p>
+                                        <p>
+                                            El tamaño máximo admitido en los ficheros que se adjunten a la aplicación no debe exceder de 10 MBytes.
+                                        </p>
+                                        <p>
+                                            Se recomienda trabajar bajo resolución gráfica mínima de  1280x1024.
+                                        </p>
+                                        <p>
+                                            Se recomienda no abrir la aplicación en varias pestañas.
+                                        </p>
+                                        <p>
+                                            Soporte técnico, contactar con:
+                                            <a title="Contacto para duda de caracter administrativo o procedimental" href="mailto:<%=correoAplicacion%>"><%=correoAplicacion%></a> (para cualquier duda de carácter administrativo o procedimental) 
+                                        </p>
+                                        <p>
+                                            <a title="Contacto para duda o problema ténico" id="aOficinaVirtual" runat="server" ></a> (para cualquier duda o problema informático).
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer" style="border: 0px !important">
+                                        <asp:Button ID="btnVolverInform" data-dismiss="modal" Width="100px" UseSubmitBehavior="false" CssClass="btn colorEstandar" runat="server" ToolTip="Cierra la página Acerca de" Text="Volver" />
+                                    </div>
+                                </asp:Panel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="footer">
+            <div class="left_footer">
+                <p style="padding: 0;">D.G. de Industria y de la Pequeña y Mediana Empresa - E04934602</p>
+                <p style="padding: 0;">Gobierno de España. Ministerio de Industria, Comercio y Turismo.</p>
+                <address>
+                    <abbr title="Paseo">P.</abbr>
+                    de la Castellana 160,
+                        <abbr title="Código Postal">C.P.</abbr>
+                    28046 Madrid. España
+                </address>
+
+            </div>
+            <div class="right_footer" id="divAccesibilidad" runat="server">
+                <a title="Accesibilidad Acceso directo [Alt + 0]" accesskey="0" href="https://sede.minetur.gob.es/es-ES/Paginas/accesibilidad.aspx" target="_blank" style="color: white">Accesibilidad</a>
+
+                <a href="http://www.w3.org/WAI/WCAG2AA-Conformance" target="_blank">
+                    <asp:Image ID="imgAccesibilidad" runat="server" AlternateText="Válido WAI Doble-A" ImageUrl="~/img/wcag2AA.gif" />
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+    <div id="capaGrisFondo" class="reloj" style="display: none"></div>
+    <div id="imagenCargandoFondo" class="relojImg" style="display: none">
+        <h3>Espere por favor...</h3>
+        <div>
+            <asp:Image AlternateText="Cargando" ID="imgCargando" runat="server" ImageUrl="~/Content/Imagenes/espera.gif" Width="90%" />
+        </div>
+    </div>
+
+    <%--Obtengo las dimensiones exactas de la pantalla mediante JQuery--%>
+    <script type="text/javascript">
+
+        function ContinuarModificacion(mensaje, validacion) {
+            if (validacion) {
+                if (typeof (Page_ClientValidate) == 'function') {
+                    if (Page_ClientValidate()) {
+                        return confirm(mensaje + ", ¿Está usted seguro?");
+                    }
+                    else {
+                        return false
+                    }
+                }
+                else {
+                    return false
+                }
+            }
+            else {
+                return confirm(mensaje + ", ¿desea continuar?");
+            }
+        }
+        $(".linkLoading").click(function () {
+            $("#UpdateProgress1").show();
+            $("#<%= uProgress.ClientID %>").show();
+        });
+
+
+        $(function () {
+            $(window).load(function () {
+                if (document.readyState === "complete") {
+                    $("#UpdateProgress1").hide();
+                    $("#relojProgress1").hide();
+                    $("#<%= uProgress.ClientID %>").hide();
+               }
+
+               redimensionar();
+
+               Sys.WebForms.PageRequestManager.getInstance().add_endRequest(calendario);
+
+               function calendario(sender, args) {
+                   $(".calendar").datepicker({
+                       language: "es",
+                       changeMonth: true,
+                       changeYear: true
+                   });
+               }
+               $(".calendar").datepicker({
+                   language: "es",
+                   changeMonth: true,
+                   changeYear: true
+               });
+               $("#accordian ul ul").hide();
+
+               $("#accordian ul span").click(function () {
+                   //Colapsa todo el menú
+                   $("#accordian ul ul").slideUp();
+
+                   if (!$(this).next().is(":visible")) {
+                       $(this).next().slideDown();
+                       document.getElementById('menuActivo').value = $(this).attr("id");
+                       $("#btnCargarOpcion").click();
+                   }
+               });
+               $("[id='<%= OpcionMenu%>']").parent().find("ul").show();
+
+           });
+
+           $(window).resize(function () {
+               redimensionar();
+           });
+
+       });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            CrearOptGroupsCombos();
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function () {
+            CrearOptGroupsCombos();
+        });
+
+        function CrearOptGroupsCombos() {
+            var groups = {};
+            $("select option[data-category]").each(function () {
+                groups[$.trim($(this).attr("data-category"))] = true;
+            });
+            $.each(groups, function (c) {
+                $("select option[data-category='" + c + "']").wrapAll('<optgroup label="' + c + '"/>');
+            });
+        }
+    </script>
+</body>
+</html>

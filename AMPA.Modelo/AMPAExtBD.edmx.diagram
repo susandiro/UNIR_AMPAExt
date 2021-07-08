@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fa67fd2d0ef54e58babac42b076428d6" Name="Diagram1">
+        <EntityTypeShape EntityType="AMPAEXTModel.ACTIVIDAD" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="AMPAEXTModel.ACTIVIDAD_DESCUENTO" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="AMPAEXTModel.ACTIVIDAD_HORARIO" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="AMPAEXTModel.ALUMNO" Width="1.5" PointX="8.25" PointY="11.875" />
+        <EntityTypeShape EntityType="AMPAEXTModel.ALUMNO_ACTIVIDAD" Width="1.5" PointX="10.5" PointY="9.375" />
+        <EntityTypeShape EntityType="AMPAEXTModel.AMPA" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="AMPAEXTModel.CLASE" Width="1.5" PointX="3.75" PointY="25" />
+        <EntityTypeShape EntityType="AMPAEXTModel.CURSO" Width="1.5" PointX="3.75" PointY="22.625" />
+        <EntityTypeShape EntityType="AMPAEXTModel.CURSO_CLASE" Width="1.5" PointX="6" PointY="23.375" />
+        <EntityTypeShape EntityType="AMPAEXTModel.DESCUENTO" Width="1.5" PointX="3" PointY="28" />
+        <EntityTypeShape EntityType="AMPAEXTModel.EMPRESA" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="AMPAEXTModel.EMPRESA_AMPA" Width="1.5" PointX="8" PointY="4.25" />
+        <EntityTypeShape EntityType="AMPAEXTModel.MONITOR" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="AMPAEXTModel.TIPO_DOCUMENTO" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="AMPAEXTModel.TUTOR" Width="1.5" PointX="6" PointY="10.75" />
+        <EntityTypeShape EntityType="AMPAEXTModel.USUARIO_AMPA" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="AMPAEXTModel.USUARIO_EMPRESA" Width="1.5" PointX="3" PointY="11.5" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__40E497F3" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AC__47919582" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_AM__3C1FE2D6" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_EM__3B2BBE9D" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_DE__4885B9BB" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ACTIVIDAD__ID_MO__41D8BC2C" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ALUMNO_AC__ID_AC__56D3D912" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ALUMNO__ID_CURSO__520F23F5" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ALUMNO__ID_TUTOR__511AFFBC" />
+        <AssociationConnector Association="AMPAEXTModel.FK__ALUMNO_AC__ID_AL__55DFB4D9" />
+        <AssociationConnector Association="AMPAEXTModel.FK__CURSO_CLA__ID_AM__10416098" />
+        <AssociationConnector Association="AMPAEXTModel.FK__EMPRESA_A__ID_AM__4B973090" />
+        <AssociationConnector Association="AMPAEXTModel.FK__TUTOR__ID_AMPA__17E28260" />
+        <AssociationConnector Association="AMPAEXTModel.FK__USUARIO_A__ID_AM__5708E33C" />
+        <AssociationConnector Association="AMPAEXTModel.FK__CURSO_CLA__ID_CL__0F4D3C5F" />
+        <AssociationConnector Association="AMPAEXTModel.FK__CURSO_CLA__ID_CU__0E591826" />
+        <AssociationConnector Association="AMPAEXTModel.FK__EMPRESA_A__ID_EM__4C8B54C9" />
+        <AssociationConnector Association="AMPAEXTModel.FK__MONITOR__ID_EMPR__000AF8CF" />
+        <AssociationConnector Association="AMPAEXTModel.FK__USUARIO_E__ID_EM__5DB5E0CB" />
+        <AssociationConnector Association="AMPAEXTModel.FK__MONITOR__ID_TIPO__00FF1D08" />
+        <AssociationConnector Association="AMPAEXTModel.FK__TUTOR__T1_ID_TIP__18D6A699" />
+        <AssociationConnector Association="AMPAEXTModel.FK__TUTOR__T2_ID_TIP__19CACAD2" />
+        <AssociationConnector Association="AMPAEXTModel.FK__USUARIO_A__ID_TI__57FD0775" />
+        <AssociationConnector Association="AMPAEXTModel.FK__USUARIO_E__ID_TI__5EAA0504" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

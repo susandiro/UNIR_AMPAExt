@@ -1,0 +1,153 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteSocio.Master.cs" Inherits="Masters_SiteSocio" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html>
+<html lang="es-es" xml:lang="es-ES">
+<head runat="server">
+    <title>Registro AMPA y Extraescolares</title>
+    <base target="_self" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <%--<link runat="server" rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />--%>
+    <link runat="server" rel="stylesheet" type="text/css" href="~/Content/AMPAExt.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $('.button').on('click', function () {
+                  //Añadimos la imagen de carga en el contenedor
+                  $('#content').html('<div class="loading"><img src="images/loader.gif" alt="loading" /><br/>Un momento, por favor...</div>');
+
+                  $.ajax({
+                      type: "POST",
+                      url: "ajax.php",
+                      success: function (data) {
+                          //Cargamos finalmente el contenido deseado
+                          $('#content').fadeIn(1000).html(data);
+                      }
+                  });
+                  return false;
+              });
+          });    
+   </script>
+</head>
+<body class="ampa">
+    <div class="container-fluid">
+        <div id="wrapper">
+            <div class="row" style="padding-top:0px" id="menuCabecera" runat="server">
+                <div class="col-lg titulo">
+                    <div id="menu">
+                        <!--menu-->
+                        <div id="menu_top">
+                            <!--menu top-->
+                            <ul class="nav">
+                                <li class="nav-item">
+                                     <asp:HyperLink CssClass="nav-link" runat="server" NavigateUrl="~/UI/Index.aspx" ToolTip="Inicio">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                                            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                                        </svg>&nbsp;Inicio</asp:HyperLink>
+                                    </li>
+                               <%-- <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                                            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                        </svg>&nbsp;Manual de usuario</a>
+                                </li>--%>
+                                <li class="nav-item" runat="server" id="lSalir">
+                                    <asp:HyperLink CssClass="nav-link" runat="server" NavigateUrl="~/UI/Login.aspx" ToolTip="Salir">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                        </svg>&nbsp;Salir </asp:HyperLink>
+                                </li>
+                                <li>
+                                   <span runat="server" ID="datosUsuario" class="left" style="padding:1em 0 0 5em"></span> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--menu top end-->
+            </div>
+            <div class="row" style="padding-top:0px;width:100%;padding-bottom:0.50em" id="header">
+                <div class="col-md-9 titulo">
+                    <h1>Registro AMPA y extraescolares</h1>
+                    <h6>IES Nombre del colegio</h6>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <img class='img-fluid' src='https://localhost/AMPAExt/Content/Imagenes/LogoMini.png' alt='Colegio'/>
+            <div class="row" style="padding-top:0px" runat="server" id="menuHorizontal">
+                <div class="col-lg">
+                    <div id="middle-nav">
+                        <div id="nav_top">
+                            <!--menu top-->
+                            <ul class="nav nav-pills">
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="~/UI/Extraescolar.aspx" runat="server" id="menuEmprs">Empresas extraescolares</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/UI/ActividadExt.aspx" runat="server" id="menuActividades">Actividades extraescolares</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="~/UI/Socios.aspx" runat="server" id="menuSocios">Socios AMPA</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/UI/Administracion.aspx" runat="server" id="menuUsuario">Administración</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg">
+                       <div id="content_wrapper">
+          <div id="content_laft">
+            <div id="box_1">
+                <h2>Menú</h2>
+                <ul>
+                    <li runat="server" ID="LNuevaAct"><asp:HyperLink CssClass="menu" runat="server" NavigateUrl="~/UI/Socio/AltaSocio.aspx" ToolTip="Acceso al alta de un nuevo socio ">Nuevo socio</asp:HyperLink></li>
+                    <li runat="server" ID="lGestion" visible="false"><asp:HyperLink CssClass="menu" runat="server" NavigateUrl="~/UI/Socio/GestionSocios.aspx" ToolTip="Acceso a la gestión de empresas">Gestión de socios</asp:HyperLink></li>
+                    <li runat="server" ID="lActividades" visible="false"><asp:HyperLink CssClass="menu" runat="server" NavigateUrl="~/UI/Actividades/AltaEmpresaExt.aspx" ToolTip="Acceso al alta de empresa extraescolar">Gestión actividades AMPA</asp:HyperLink></li>
+                    <li runat="server" ID="lMonitores" visible="false"><asp:HyperLink CssClass="menu" runat="server" NavigateUrl="~/UI/Actividades/AltaUsuarioExt.aspx" ToolTip="Acceso al alta de usuario de empresa extraescolar">Gestión monitores</asp:HyperLink></li>
+               </ul>
+            </div>
+            <div class="clr"></div>
+        </div>
+           <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder></div>
+                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg">
+                    <div id="footer" class="navbar navbar-fixed-bottom">
+                        <div id="footer_nav">
+                            <ul>
+                                <li>C/ Las encinas, 23</li>
+                                <li>Tlf. 945213262</li>
+                                <li><a href="mailto:contacto@colegio.com">contacto@colegio.com</a></li>
+                                <li><a href="https://www.freepik.es/vectores/fondo">Imágenes de www.freepik.es</a></li>
+                                 <li><a href="https://icons8.com">Iconos de Icons8</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
