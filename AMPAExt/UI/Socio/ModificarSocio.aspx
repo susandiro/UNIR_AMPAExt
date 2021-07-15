@@ -91,7 +91,7 @@
                         <label for="txtTelefono1">Teléfono <span style="color: red">*</span>: </label>
                     </div>
                     <div class="col-md-7">
-                        <asp:TextBox ID="txtTelefono1" TextMode="Phone" ToolTip="Teléfono del padre/tutor1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtTelefono1" TextMode="Phone" ToolTip="Teléfono del padre/tutor1" CssClass="txtObligatorio" runat="server"></asp:TextBox>
                     </div>
                     <div class="col-md-2">
                         <asp:Label ID="lblTelefono1" runat="server" Text="Obligatorio" CssClass="errorValid" Visible="false"></asp:Label>
@@ -271,6 +271,7 @@
                             EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." Width="100%" CssClass="Grid" AccessKey="G">
                             <Columns>
                                 <asp:TemplateField HeaderText=" " ShowHeader="False">
+                                    <HeaderStyle Width="50" />
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgBorrar" runat="server" CommandArgument='<%# Eval("ID_ALUMNO") %>' CommandName="Baja" CausesValidation="false" ToolTip="Baja del socio" OnClientClick="if(!confirm('Se va a borrar el hijo/alumno para el socio, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
                                     </ItemTemplate>
@@ -278,28 +279,25 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nombre del alumno" ShowHeader="true" AccessibleHeaderText="Nombre"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="250" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbnombre" runat="server" Text='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>' ToolTip='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>'
-                                            Width="250">
+                                             CssClass="acortaLabel largo" Width="250">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                  <asp:TemplateField HeaderText="Fecha de nacimiento" ShowHeader="true" AccessibleHeaderText="Fecha"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="250" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbFecha" runat="server" Text='<%# DateTime.Parse(Eval("FECHA_NACIMIENTO").ToString()).ToShortDateString().ToString() %>' ToolTip='<%# DateTime.Parse(Eval("FECHA_NACIMIENTO").ToString()).ToShortDateString().ToString() %>'
-                                            Width="250">
+                                             CssClass="acortaLabel corto" Width="100">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Curso" ShowHeader="true" AccessibleHeaderText="Curso"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
-                                    <ItemTemplate>
+                                   <ItemTemplate>
                                         <asp:Label ID="lbCurso" runat="server" Text='<%# string.Concat(Eval("CURSO_CLASE.CURSO.NOMBRE"), " ", Eval("CURSO_CLASE.CLASE.NOMBRE")) %>'
-                                            Width="100">
+                                             CssClass="acortaLabel corto" Width="150">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>

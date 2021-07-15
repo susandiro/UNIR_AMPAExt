@@ -51,11 +51,28 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Al seleccionar un curso, se carga el listado de clases que tiene
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbCurso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbCurso.SelectedValue))
+            {
+                CargarClase(int.Parse(cmbCurso.SelectedValue));
+                cmbClase.Enabled = true;
+            }
+            else
+            {
+                cmbClase.Items.Clear();
+                cmbClase.Enabled = false;
+            }
+        }
 
         /// <summary>
         /// Evento producido al pulsar sobre el botón limpiar del filtro. Carga el grid como en el estado inicial
@@ -81,6 +98,7 @@ namespace AMPAExt.UI.Extraescolar
                 ScriptManager.RegisterStartupScript(Page, GetType(), "GestorUsuario", "alert('Se ha producido un error al limpiar los datos del filtro');", true);
             }
         }
+
         /// <summary>
         /// Evento producido al pulsar sobre el botón filtrar del filtro. Carga el grid con los criterios indicados en el filtro
         /// </summary>
@@ -98,9 +116,10 @@ namespace AMPAExt.UI.Extraescolar
                 ScriptManager.RegisterStartupScript(Page, GetType(), "GestorUsuario", "alert('Se ha producido un error al buscar en el listado');", true);
             }
         }
+        #endregion
 
         #region Eventos del grid
-        
+
         /// <summary>
         /// Procedimiento de la grid, al crear una fila
         /// </summary>
@@ -134,7 +153,7 @@ namespace AMPAExt.UI.Extraescolar
 
         #endregion
 
-  
+        #region Métodos privados
         /// <summary>
         /// Asigna los valores del filtro
         /// </summary>
@@ -171,7 +190,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }
@@ -268,24 +287,7 @@ namespace AMPAExt.UI.Extraescolar
                 throw;
             }
         }
+        #endregion
 
-        /// <summary>
-        /// Al seleccionar un curso, se carga el listado de clases que tiene
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void cmbCurso_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbCurso.SelectedValue))
-            {
-                CargarClase(int.Parse(cmbCurso.SelectedValue));
-                cmbClase.Enabled = true;
-            }
-            else
-            {
-                cmbClase.Items.Clear();
-                cmbClase.Enabled = false;
-            }
-        }
     }
 }

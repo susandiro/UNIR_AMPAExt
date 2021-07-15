@@ -12,6 +12,7 @@ public partial class Masters_SiteInicial : MasterPageBase
     /// <param name="e"></param>
     protected override void OnInit(EventArgs e)
     {
+        log4net.Config.XmlConfigurator.Configure();
         base.OnInit(e);
     }
 
@@ -30,47 +31,5 @@ public partial class Masters_SiteInicial : MasterPageBase
         }
 
     }
-
-    /// <summary>
-    /// Muestra en pantalla el tipo de mensaje que se desee dar al usuario
-    /// </summary>
-    /// <param name="tipo">Tipo de mensaje a mostrar</param>
-    /// <param name="mensaje">Mensaje que se le va a dar</param>
-    public void MostrarMensaje(TipoDatos.TipoError tipo, string mensaje)
-    {
-        switch (tipo)
-        {
-            case TipoDatos.TipoError.Error:
-                alertError.Visible = true;
-                lbError.Text = mensaje;
-                break;
-            case TipoDatos.TipoError.Warning:
-                alertWarning.Visible = true;
-                lbWarning.Text = mensaje;
-                break;
-            case TipoDatos.TipoError.Success:
-                alertSuccess.Visible = true;
-                lbSuccess.Text = mensaje;
-                break;
-            case TipoDatos.TipoError.Limpiar:
-            default:
-                alertSuccess.Visible = false;
-                alertWarning.Visible = false;
-                alertError.Visible = false;
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Evento que se desencadena al pulsar desconectar
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void Desconectar(object sender, EventArgs e)
-    {
-        Session.Clear();
-        Response.Redirect("~/UI/Login.aspx", false);
-    }
-
     #endregion
 }

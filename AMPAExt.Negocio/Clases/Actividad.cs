@@ -137,6 +137,16 @@ namespace AMPAExt.Negocio
         }
 
         /// <summary>
+        /// Obtiene la AMPA de un alumno
+        /// </summary>
+        /// <param name="idAlumno">Identificador del alumno</param>
+        /// <returns>Datos de las AMPA <see cref="ALUMNO"/></returns>
+        public ALUMNO GetAMPAByAlumno(int idAlumno)
+        {
+            return ActividadDat.GetAMPAByAlumno(idAlumno);
+        }
+
+        /// <summary>
         /// Da de baja una actividad extraescolar
         /// </summary>
         /// <param name="actividad">Datos de la actividad en <see cref="ACTIVIDAD"/></param>
@@ -161,7 +171,8 @@ namespace AMPAExt.Negocio
                         actividad.ACTIVO = "N";
                         if (!ActividadDat.ModificarActividad(actividad, conn))
                             throw new Exception("No se ha podido actualizar la actividad con activo N: " + actividad.ID_ACTIVIDAD.ToString());
-
+                        resultado = true;
+                        transaccion.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -173,7 +184,6 @@ namespace AMPAExt.Negocio
             }
             return resultado;
         }
-
 
         /// <summary>
         /// Da de baja un alumno de una actividad extraescolar
@@ -288,6 +298,46 @@ namespace AMPAExt.Negocio
             return ActividadDat.CambiarActividadEmpresa(resultado);
         }
 
+        /// <summary>
+        /// Intercambia los alumnos de una actividad extraescolar (actividad y horario) a otra actividad extraescolar
+        /// </summary>
+        /// <param name="idActividadHorarioOrigen">Identificador de la actividad y horario de origen</param>
+        /// <param name="idActividadHorarioDestino">Identificador de la actividad y horario de destino</param>
+        /// <param name="usuarioAccion">Usuario que realiza la acción</param>
+        /// <returns>Booleano con el resultado: true si ha ido todo bien; false en caso contrario</returns>
+        public bool IntercambiarEmpresa(int idActividadHorarioOrigen, int idActividadHorarioDestino, string usuarioAccion)
+        {
+            bool resultado = false;
+            using (AMPAEXTBD conn = new AMPAEXTBD())
+            {
+                using (DbContextTransaction transaccion = conn.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        //Se guardan los alumnos que hay en origen
+                        List<ALUMNO_ACTIVIDAD> alumnosOrigen = ActividadDat.GetAlumnosByActividadHorario(idActividadHorarioOrigen, conn);
+                        //Se actualizan los alumnos de origen en actividad y horario de destino
+                        foreach (ALUMNO_ACTIVIDAD alumno in alumnosOrigen)
+                        {
+                            alumno.ID_ACT_HORARIO = idActividadHorarioDestino;
+                            alumno.USUARIO = usuarioAccion;
+                            alumno.FECHA_MOD = DateTime.Now;
+                        }
+                        
+                        conn.SaveChanges();
+                        transaccion.Commit();
+                        resultado = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaccion.Rollback();
+                        Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".IntercambiarEmpresa(). idActividadHorarioOrigen: " + idActividadHorarioOrigen.ToString() + ", idActividadHorarioDestino: " + idActividadHorarioDestino.ToString() + ", usuarioAccion: " + usuarioAccion, ex);
+                        throw;
+                    }
+                    return resultado;
+                }
+            }
+        }
         /// <summary>
         /// Mapea una actividad extraescolar
         /// </summary>

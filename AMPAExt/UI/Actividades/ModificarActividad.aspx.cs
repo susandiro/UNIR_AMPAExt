@@ -12,6 +12,7 @@ namespace AMPAExt.UI.Actividades
     /// </summary>
     public partial class ModificarActividad : PageBase
     {
+        #region Propiedades
         /// <summary>
         /// Propiedad con el mensaje de comunicación para el control
         /// </summary>
@@ -30,6 +31,7 @@ namespace AMPAExt.UI.Actividades
                     return (List<ACTIVIDAD_HORARIO>)Session["listadoHorario"];
             }
         }
+
         /// <summary>
         /// Listado de descuentos de la actividad
         /// </summary>
@@ -43,10 +45,14 @@ namespace AMPAExt.UI.Actividades
                     return (List<ACTIVIDAD_DESCUENTO>)Session["listadoDescuento"];
             }
         }
+
         /// <summary>
         /// Identificador de la actividad a modificar
         /// </summary>
         public int IdActividad { get; set; }
+        #endregion
+
+        #region Eventos
         /// <summary>
         /// Antes de cargar la página se define que es necesario estar logado
         /// </summary>
@@ -90,86 +96,9 @@ namespace AMPAExt.UI.Actividades
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar modificación de actividad", ex);
-                Error("Se ha producido un error al cargar los datos de la actividad");
+                ErrorGeneral("Se ha producido un error al cargar los datos de la actividad");
             }
         }
-
-        #region Eventos del grid
-
-        /// <summary>
-        /// Procedimiento de la grid, al crear una fila
-        /// </summary>
-        protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes.Add("onmouseover", "this.style.background='#FFF0A2'");
-                e.Row.Attributes.Add("onmouseout", "this.style.background='#FFFFFF'");
-            }
-        }
-
-        /// <summary>
-        /// Procedimiento de la grid, al ejecutar un comando
-        /// </summary>
-        protected void gvHorarios_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if (gvHorarios.Rows.Count > 0)
-                {
-                    //Se recupera el identificador de la fila
-                    int idHorario = int.Parse(e.CommandArgument.ToString());
-                    switch (e.CommandName)
-                    {
-                        case "Baja":
-                            if (Horario != null)
-                                Horario.Remove(Horario.Find(c => c.ID_ACT_HORARIO == idHorario));
-                            Session["listadoHorario"] = Horario;
-                            gvHorarios.DataSource = Horario;
-                            gvHorarios.DataBind();
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".gvHorarios_RowCommand().Eliminar." + ex.ToString());
-                ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "alert('Se ha producido un error al borrar el horario');", true);
-                return;
-            }
-        }
-
-        /// <summary>
-        /// Procedimiento de la grid, al ejecutar un comando
-        /// </summary>
-        protected void gvDescuento_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if (gvDescuento.Rows.Count > 0)
-                {
-                    //Se recupera el identificador de la fila
-                    int idDescuento = int.Parse(e.CommandArgument.ToString());
-                    switch (e.CommandName)
-                    {
-                        case "Baja":
-                            if (Descuento != null)
-                                Descuento.Remove(Descuento.Find(c => c.ID_ACT_DESCUENTO== idDescuento));
-                            Session["listadoDescuento"] = Descuento;
-                            gvDescuento.DataSource = Descuento;
-                            gvDescuento.DataBind();
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".gvDescuento_RowCommand().Eliminar." + ex.ToString());
-                ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "alert('Se ha producido un error al borrar el descuento');", true);
-                return;
-            }
-        }
-        #endregion
 
         /// <summary>
         /// Se realiza una validación previa sobre el formulario y en caso de que sea correcto, se da de alta en base de datos
@@ -292,6 +221,147 @@ namespace AMPAExt.UI.Actividades
             }
         }
 
+        /// <summary>
+        /// Al seleccionar una empresa, se carga el listado de monitores
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbEmpresa.SelectedValue))
+                CargarMonitores(int.Parse(cmbEmpresa.SelectedValue));
+            else
+            {
+                cmbMonitor.Items.Clear();
+                cmbMonitor.Enabled = false;
+            }
+
+        }
+
+        /// <summary>
+        /// Evento generado al pulsar en añadir un nuevo descuento para la actividad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnDescuento_Click(object sender, EventArgs e)
+        {
+            _mensaje = new StringBuilder();
+            PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Limpiar, string.Empty);
+            if (string.IsNullOrEmpty(cmbActDescuentos.SelectedValue))
+                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar un descuento para la actividad</li>");
+            if (string.IsNullOrEmpty(txtValor.Text))
+                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar el valor del descuento</li>");
+            if (_mensaje.Length != 0)
+                PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, _mensaje.ToString());
+            else
+            {
+                List<ACTIVIDAD_DESCUENTO> listado = new List<ACTIVIDAD_DESCUENTO>();
+                if (Descuento != null)
+                    listado = Descuento;
+                ACTIVIDAD_DESCUENTO nuevo = new ACTIVIDAD_DESCUENTO();
+                nuevo.ID_ACT_DESCUENTO = listado.Count;
+                nuevo.ID_DESCUENTO = int.Parse(cmbActDescuentos.SelectedValue);
+                nuevo.DESCUENTO = new DESCUENTO();
+                nuevo.DESCUENTO.NOMBRE = cmbActDescuentos.SelectedItem.Text;
+                nuevo.VALOR = int.Parse(txtValor.Text);
+                listado.Add(nuevo);
+                Session["listadoDescuento"] = listado;
+                gvDescuento.DataSource = listado;
+                gvDescuento.DataBind();
+            }
+        }
+
+        /// <summary>
+        /// Evento generado al pulsar sobre el botón cancelar. Limpia las variable de sesión utilizadas y vuelve a la página de gestión
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Session["IdActividad"] = null;
+            Session["listadoHorario"] = null;
+            Session["listadoDescuento"] = null;
+            Response.Redirect("GestionActividades.aspx?grid=S", false);
+        }
+        #endregion
+
+        #region Eventos del grid
+        /// <summary>
+        /// Procedimiento de la grid, al crear una fila
+        /// </summary>
+        protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes.Add("onmouseover", "this.style.background='#FFF0A2'");
+                e.Row.Attributes.Add("onmouseout", "this.style.background='#FFFFFF'");
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento de la grid, al ejecutar un comando
+        /// </summary>
+        protected void gvHorarios_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (gvHorarios.Rows.Count > 0)
+                {
+                    //Se recupera el identificador de la fila
+                    int idHorario = int.Parse(e.CommandArgument.ToString());
+                    switch (e.CommandName)
+                    {
+                        case "Baja":
+                            if (Horario != null)
+                                Horario.Remove(Horario.Find(c => c.ID_ACT_HORARIO == idHorario));
+                            Session["listadoHorario"] = Horario;
+                            gvHorarios.DataSource = Horario;
+                            gvHorarios.DataBind();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".gvHorarios_RowCommand().Eliminar." + ex.ToString());
+                ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "alert('Se ha producido un error al borrar el horario');", true);
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento de la grid, al ejecutar un comando
+        /// </summary>
+        protected void gvDescuento_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (gvDescuento.Rows.Count > 0)
+                {
+                    //Se recupera el identificador de la fila
+                    int idDescuento = int.Parse(e.CommandArgument.ToString());
+                    switch (e.CommandName)
+                    {
+                        case "Baja":
+                            if (Descuento != null)
+                                Descuento.Remove(Descuento.Find(c => c.ID_ACT_DESCUENTO== idDescuento));
+                            Session["listadoDescuento"] = Descuento;
+                            gvDescuento.DataSource = Descuento;
+                            gvDescuento.DataBind();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".gvDescuento_RowCommand().Eliminar." + ex.ToString());
+                ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "alert('Se ha producido un error al borrar el descuento');", true);
+                return;
+            }
+        }
+        #endregion
+
+        #region Métodos privados
         /// <summary>
         /// Valida que los campos obligatorios hayan sido rellenados.
         /// </summary>
@@ -466,68 +536,7 @@ namespace AMPAExt.UI.Actividades
                 PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "ERROR: No se ha encontrado al usuario en el sistema");
             }
         }
-
-        /// <summary>
-        /// Al seleccionar una empresa, se carga el listado de monitores
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbEmpresa.SelectedValue))
-                CargarMonitores(int.Parse(cmbEmpresa.SelectedValue));
-            else
-            {
-                cmbMonitor.Items.Clear();
-                cmbMonitor.Enabled = false;
-            }
-
-        }
-
-        /// <summary>
-        /// Evento generado al pulsar en añadir un nuevo descuento para la actividad
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnDescuento_Click(object sender, EventArgs e)
-        {
-            _mensaje = new StringBuilder();
-            PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Limpiar, string.Empty);
-            if (string.IsNullOrEmpty(cmbActDescuentos.SelectedValue))
-                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar un descuento para la actividad</li>");
-            if (string.IsNullOrEmpty(txtValor.Text))
-                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar el valor del descuento</li>");
-            if (_mensaje.Length != 0)
-                PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, _mensaje.ToString());
-            else
-            {
-                List<ACTIVIDAD_DESCUENTO> listado = new List<ACTIVIDAD_DESCUENTO>();
-                if (Descuento != null)
-                    listado = Descuento;
-                ACTIVIDAD_DESCUENTO nuevo = new ACTIVIDAD_DESCUENTO();
-                nuevo.ID_ACT_DESCUENTO = listado.Count;
-                nuevo.ID_DESCUENTO = int.Parse(cmbActDescuentos.SelectedValue);
-                nuevo.DESCUENTO = new DESCUENTO();
-                nuevo.DESCUENTO.NOMBRE = cmbActDescuentos.SelectedItem.Text;
-                nuevo.VALOR = int.Parse(txtValor.Text);
-                listado.Add(nuevo);
-                Session["listadoDescuento"] = listado;
-                gvDescuento.DataSource = listado;
-                gvDescuento.DataBind();
-            }
-        }
-
-        /// <summary>
-        /// Evento generado al pulsar sobre el botón cancelar. Limpia las variable de sesión utilizadas y vuelve a la página de gestión
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Session["IdActividad"] = null;
-            Session["listadoHorario"] = null;
-            Session["listadoDescuento"] = null;
-            Response.Redirect("GestionActividades.aspx?grid=S", false);
-        }
+            
+        #endregion
     }
 }

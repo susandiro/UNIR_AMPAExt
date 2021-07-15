@@ -170,6 +170,5 @@ namespace AMPAExt.Negocio
             return UsuarioDat.ModificarUsuarioAMPA(usuario);
         }
 
-
     }
 }

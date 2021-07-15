@@ -63,7 +63,7 @@ namespace AMPAExt.UI.Extraescolar
             catch(Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el monitor.", ex);
-                Error("Se ha producido un error al cargar los datos del monitor de la empresa extraescolar");
+                ErrorGeneral("Se ha producido un error al cargar los datos del monitor de la empresa extraescolar");
             }
         }
 

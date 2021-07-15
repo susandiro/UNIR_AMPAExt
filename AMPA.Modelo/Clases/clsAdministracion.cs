@@ -200,8 +200,8 @@ namespace AMPAExt.Modelo
                 {
                     empresas = db.EMPRESA_AMPA
                         .Where(c => c.ID_EMPRESA == idEmpresa && c.ACTIVO == "S")
-                        .Include(c => c.EMPRESA)
-                        .OrderBy(c => c.EMPRESA.NOMBRE)
+                        .Include(c => c.AMPA)
+                        .OrderBy(c => c.AMPA.NOMBRE)
                .ToList();
                 }
             }
@@ -313,6 +313,7 @@ namespace AMPAExt.Modelo
             catch (Exception ex)
             {
                 Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".BajaUsuarioAMPA(). idUsuario: " + idUsuario.ToString() + ", idAMPA: " + idAMPA.ToString(), ex);
+                throw;
             }
             return resultado;
         }

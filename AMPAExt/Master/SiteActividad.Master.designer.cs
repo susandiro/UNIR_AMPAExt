@@ -112,24 +112,6 @@ public partial class Masters_SiteActividad
     protected global::System.Web.UI.HtmlControls.HtmlGenericControl lGestion;
 
     /// <summary>
-    /// Control lActividades.
-    /// </summary>
-    /// <remarks>
-    /// Campo generado automáticamente.
-    /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl lActividades;
-
-    /// <summary>
-    /// Control lMonitores.
-    /// </summary>
-    /// <remarks>
-    /// Campo generado automáticamente.
-    /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl lMonitores;
-
-    /// <summary>
     /// Control lAsignacion.
     /// </summary>
     /// <remarks>

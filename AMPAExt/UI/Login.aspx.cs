@@ -51,7 +51,7 @@ public partial class Login : PageBase
         catch(Exception ex)
         {
             Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".btnLogin_Click().", ex);
-            Error("Se ha producido un error al realizar el acceso a la aplicación");
+            ErrorGeneral("Se ha producido un error al realizar el acceso a la aplicación");
         }
     }
 }

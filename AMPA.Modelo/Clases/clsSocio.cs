@@ -276,32 +276,33 @@ namespace AMPAExt.Modelo
             {
                 using (AMPAEXTBD db = new AMPAEXTBD())
                 {
-                    var query = db.ALUMNO
-                        .Where(c => c.ALUMNO_ACTIVIDAD == c.ALUMNO_ACTIVIDAD.Where(d => d.ACTIVIDAD_HORARIO.ACTIVIDAD.ID_EMPRESA == idEmpresa))
-                        .Include(c => c.CURSO_CLASE.CURSO)
-                        .Include(c => c.CURSO_CLASE.CLASE);
+                    resultado = db.ALUMNO_ACTIVIDAD
+                        .Where(c => c.ACTIVIDAD_HORARIO.ACTIVIDAD.ID_EMPRESA == idEmpresa)
+                        .Select(c=>c.ALUMNO).Distinct()
+                        .Include(c=>c.CURSO_CLASE.CURSO)
+                        .Include(c=>c.CURSO_CLASE.CLASE)
+                        .OrderBy(c=> c.CURSO_CLASE.CURSO.NOMBRE)
+                        .ToList();
 
                     if (!filtro.Vacio)
                     {
                         if (filtro.IdCurso > 0)
-                            query = query.Where(c => c.CURSO_CLASE.ID_CURSO == filtro.IdCurso);
+                            resultado = resultado.Where(c => c.CURSO_CLASE.ID_CURSO == filtro.IdCurso).ToList();
 
                         if (filtro.IdClase > 0)
-                            query = query.Where(c => c.CURSO_CLASE.ID_CLASE == filtro.IdClase);
+                            resultado = resultado.Where(c => c.CURSO_CLASE.ID_CLASE == filtro.IdClase).ToList();
 
                         if (!string.IsNullOrEmpty(filtro.NumDocumentoTutor))
-                            query = query.Where(c => c.TUTOR.T1_NUMERO_DOCUMENTO.ToUpper().Contains(filtro.NumDocumentoTutor.ToUpper()) || c.TUTOR.T2_NUMERO_DOCUMENTO.ToUpper().Contains(filtro.NumDocumentoTutor.ToUpper()));
+                            resultado = resultado.Where(c => c.TUTOR.T1_NUMERO_DOCUMENTO.ToUpper().Contains(filtro.NumDocumentoTutor.ToUpper()) || c.TUTOR.T2_NUMERO_DOCUMENTO.ToUpper().Contains(filtro.NumDocumentoTutor.ToUpper())).ToList();
 
                         if (!string.IsNullOrEmpty(filtro.Nombre))
                         {
                             string nombre = filtro.Nombre.ToUpper();
-                            query = query.Where(c => c.NOMBRE.ToUpper().Contains(nombre) ||
+                            resultado = resultado.Where(c => c.NOMBRE.ToUpper().Contains(nombre) ||
                                                 c.APELLIDO1.ToUpper().Contains(nombre) ||
-                                                c.APELLIDO2.ToUpper().Contains(nombre));
+                                                c.APELLIDO2.ToUpper().Contains(nombre)).ToList();
                         }
                     }
-                    query = query.OrderBy(c => c.CURSO_CLASE.CURSO);
-                    resultado = query.ToList();
                 }
             }
             catch (Exception ex)

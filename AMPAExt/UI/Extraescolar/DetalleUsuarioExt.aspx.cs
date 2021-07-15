@@ -55,7 +55,7 @@ namespace AMPAExt.UI.Extraescolar
             catch(Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el usuario.", ex);
-                Error("Se ha producido un error al cargar los datos del usuario de la empresa extraescolar");
+                ErrorGeneral("Se ha producido un error al cargar los datos del usuario de la empresa extraescolar");
             }
         }
 

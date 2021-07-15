@@ -95,6 +95,30 @@ namespace AMPAExt.Modelo
         }
 
         /// <summary>
+        /// Obtiene la AMPA de un alumno
+        /// </summary>
+        /// <param name="idAlumno">Identificador del alumno</param>
+        /// <returns>Datos de las AMPA <see cref="ALUMNO"/></returns>
+        public ALUMNO GetAMPAByAlumno(int idAlumno)
+        {
+            ALUMNO resultado = new ALUMNO();
+            try
+            {
+                using (AMPAEXTBD db = new AMPAEXTBD())
+                {
+                    resultado = db.ALUMNO
+                        .Where(c => c.ID_ALUMNO == idAlumno)
+                        .Include (c=>c.TUTOR)
+                        .Include(c=>c.TUTOR.AMPA).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".GetAMPAByAlumno()", ex);
+            }
+            return resultado;
+        }
+        /// <summary>
         /// Obtiene el listado de horarios para una actividad
         /// </summary>
         /// <param name="idActividad">Identificador de la actividad</param>
@@ -129,16 +153,57 @@ namespace AMPAExt.Modelo
             {
                 using (AMPAEXTBD db = new AMPAEXTBD())
                 {
-                    resultado = db.ALUMNO_ACTIVIDAD
-                        .Where(c => c.ACTIVIDAD_HORARIO.ID_ACTIVIDAD == idActividad)
-                        .Include(c => c.ALUMNO)
-                        .Include(c => c.ACTIVIDAD_HORARIO.ACTIVIDAD)
-                        .Include(c => c.ACTIVIDAD_HORARIO).ToList();
+                    resultado =  GetAlumnnosByActividad(idActividad, db);
                 }
             }
             catch (Exception ex)
             {
                 Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".GetAlumnnosByActividad(). idActividad: " + idActividad.ToString(), ex);
+            }
+            return resultado;
+        }
+        /// <summary>
+        /// Obtiene la lista de alumnos para una actividad
+        /// </summary>
+        /// <param name="idActividad">Identificador de la actividad/param>
+        /// <param name="conn">Conexión abierta para realizar la acción</param>
+        /// <returns>Listado de <see cref="ALUMNO_ACTIVIDAD"/> con los datos de la AMPA</returns>
+        public List<ALUMNO_ACTIVIDAD> GetAlumnnosByActividad(int idActividad, AMPAEXTBD conn)
+        {
+            List<ALUMNO_ACTIVIDAD> resultado = new List<ALUMNO_ACTIVIDAD>();
+            try
+            {
+                resultado = conn.ALUMNO_ACTIVIDAD
+                    .Where(c => c.ACTIVIDAD_HORARIO.ID_ACTIVIDAD == idActividad)
+                    .Include(c => c.ALUMNO)
+                    .Include(c => c.ACTIVIDAD_HORARIO.ACTIVIDAD)
+                    .Include(c => c.ACTIVIDAD_HORARIO).ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".GetAlumnnosByActividad(). idActividad: " + idActividad.ToString(), ex);
+            }
+            return resultado;
+        }
+
+        /// <summary>
+        /// Obtiene la lista de de alumnos para una actividad y horario
+        /// </summary>
+        /// <param name="idActividadHorario">Identificador de la actividad y horario/param>
+        /// <param name="conn">Conexión abierta para realizar la acción</param>
+        /// <returns>Listado de <see cref="ALUMNO_ACTIVIDAD"/> apuntados a una actividad y horario</returns>
+        public List<ALUMNO_ACTIVIDAD> GetAlumnosByActividadHorario(int idActividadHorario, AMPAEXTBD conn)
+        {
+            List<ALUMNO_ACTIVIDAD> resultado = new List<ALUMNO_ACTIVIDAD>();
+            try
+            {
+                resultado = conn.ALUMNO_ACTIVIDAD
+                    .Where(c => c.ID_ACT_HORARIO == idActividadHorario)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".GetAlumnosByActividadHorario(). idActividad: " + idActividadHorario.ToString(), ex);
             }
             return resultado;
         }
@@ -211,6 +276,7 @@ namespace AMPAExt.Modelo
                         .Where(c => c.ID_ALUMNO == idAlumno)
                         .Include(c => c.ACTIVIDAD_HORARIO)
                         .Include(c => c.ACTIVIDAD_HORARIO.ACTIVIDAD)
+                        .Include(c => c.ACTIVIDAD_HORARIO.ACTIVIDAD.EMPRESA)
                         .ToList();
                 }
             }

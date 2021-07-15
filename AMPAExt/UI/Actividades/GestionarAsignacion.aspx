@@ -56,13 +56,12 @@
                         </div>
                      <div class="col-md-5"></div>
                      </div>
-
                  <div class="row">
                     <div class="col-md-12">
                         <h1 style="border-bottom:dotted; border-width:1px; width:80%; border-color:#316074;"> Actividad extraescolar</h1>
                     </div>
                      </div>
-               <div class="row">
+                     <div class="row">
                      <div class="col-md-1">
                         <label for="cmbEmpresa">Empresa <span style="color: red">*</span>:</label>
                     </div>
@@ -82,6 +81,7 @@
                         <asp:DropDownList ID="cmbHorario" Enabled="false" runat="server" ToolTip="Seleccione el horario de destino" CssClass="txtObligatorio" />
                     </div>
                 </div>
+
                 <div class="row">
                  <div class="col-md-1"></div>
                     <div class="col-md-2"> <asp:Label ID="lblEmpresa" runat="server" Text="Obligatorio" CssClass="errorValid" Visible="false"></asp:Label></div>
@@ -100,21 +100,31 @@
                         <h1 style="border-bottom:dotted; border-width:1px; width:80%; border-color:#316074; padding-top:1.5em"> Listado de actividades extraescolares del alumno</h1>
                     </div>
                      </div>
+                <div style="overflow: auto">
                   <asp:GridView ID="gvActividades" runat="server" AllowSorting="false" AutoGenerateColumns="false" Style="width: 100%;" BorderStyle="Outset" BorderWidth="1"
                         OnRowCreated="gvActividades_RowCreated" OnRowCommand="gvActividades_RowCommand" EmptyDataRowStyle-VerticalAlign="Middle"
                         EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." CssClass="Grid" AccessKey="G">
                         <Columns>
                                <asp:TemplateField HeaderText=" " ShowHeader="False"><HeaderStyle Width="50" />
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgBorrarAct" runat="server" CommandArgument='<%# Eval("ACTIVIDAD_HORARIO.ID_ACT_HORARIO") %>' CommandName="Baja" CausesValidation="false" ToolTip="Baja del socio" OnClientClick="if(!confirm('Se va a dar de baja al alumno, de la actividad extraescolar, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
+                                    <HeaderStyle Width="50"/>
+                                    <asp:ImageButton ID="imgBorrarAct" runat="server" CommandArgument='<%# Eval("ACTIVIDAD_HORARIO.ID_ACT_HORARIO") %>' CommandName="Baja" CausesValidation="false" ToolTip="Baja de la actividad" OnClientClick="if(!confirm('Se va a dar de baja al alumno, de la actividad extraescolar, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="center" Wrap="false" Height="26px" Width="25px" />
+                                <ItemStyle HorizontalAlign="center" Wrap="false" />
+                            </asp:TemplateField>
+                              <asp:TemplateField HeaderText="Empresa extraescolar" ShowHeader="true" AccessibleHeaderText="empresa"
+                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCortadoEpr" runat="server"  Text='<%# Eval("ACTIVIDAD_HORARIO.ACTIVIDAD.EMPRESA.NOMBRE") %>' ToolTip='<%# Eval("ACTIVIDAD_HORARIO.ACTIVIDAD.EMPRESA.NOMBRE") %>'
+                                        CssClass="acortaLabel largo" Width="250">
+                                    </asp:Label>
+                                </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Actividad extraescolar" ShowHeader="true" AccessibleHeaderText="actividad"
                                  ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCortadoDoc" runat="server"  Text='<%# Eval("ACTIVIDAD_HORARIO.ACTIVIDAD.NOMBRE") %>' ToolTip='<%# Eval("ACTIVIDAD_HORARIO.ACTIVIDAD.NOMBRE") %>'
-                                        CssClass="acortaLabel documento">
+                                        CssClass="acortaLabel largo" Width="250">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -122,7 +132,7 @@
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                 <ItemTemplate>
                                     <asp:Label ID="lbNombre" runat="server" Text='<%# Eval("ACTIVIDAD_HORARIO.DIAS") %>' ToolTip='<%# Eval("ACTIVIDAD_HORARIO.DIAS") %>'
-                                        CssClass="acortaLabel nombre">
+                                        CssClass="acortaLabel corto" Width="100">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -130,12 +140,13 @@
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                 <ItemTemplate>
                                     <asp:Label ID="lbTelefono" runat="server" Text='<%# string.Concat(Eval("ACTIVIDAD_HORARIO.HORA_INI"), " - ", Eval("ACTIVIDAD_HORARIO.HORA_FIN")) %>' ToolTip='<%# string.Concat(Eval("ACTIVIDAD_HORARIO.HORA_INI"), " - ", Eval("ACTIVIDAD_HORARIO.HORA_FIN")) %>'
-                                        CssClass="acortaLabel solicitante">
+                                        CssClass="acortaLabel corto" Width="100">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>  
+                    </div>
                  <div class="row espaciosupBoton">
                     <div class="col-md-12">
                         <asp:Button ID="BtnCancelar" CssClass="boton" runat="server" ToolTip="Vuelve a la página anterior" OnClick="BtnCancelar_Click" Text="Cancelar" />

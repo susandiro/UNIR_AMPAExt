@@ -52,52 +52,47 @@
                 <div class="row">
                     <div class="col-md-3">
                     </div>
-                    <div class="col-md-6">
-                        <asp:GridView ID="gvHorarios" runat="server" AllowSorting="false" AutoGenerateColumns="false" BorderStyle="Outset" BorderWidth="1"
+                    <div class="col-md-6" style="overflow: auto">
+                        <asp:GridView ID="gvHorarios" runat="server" AllowSorting="false" AutoGenerateColumns="false" BorderStyle="Outset" BorderWidth="1" 
                             EmptyDataRowStyle-VerticalAlign="Middle" EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." Enabled="false" Width="100%" CssClass="Grid" AccessKey="G">
                             <Columns>
                                 <asp:TemplateField HeaderText="Días" ShowHeader="true" AccessibleHeaderText="Dias"
-                                    ControlStyle-Width="110" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="110" />
+                                            ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCortadoDoc" runat="server" Text='<%# Eval("DIAS") %>' ToolTip='<%# Eval("DIAS") %>'
-                                            Width="250">
+                                            Width="100">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Hora inicio" ShowHeader="true" AccessibleHeaderText="HoraIni"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbhoraini" runat="server" Text='<%# Eval("HORA_INI") %>' ToolTip='<%# Eval("HORA_INI") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel" Width="70">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Hora finalización" ShowHeader="true" AccessibleHeaderText="HoraFin"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbhorafin" runat="server" Text='<%# Eval("HORA_FIN") %>' ToolTip='<%# Eval("HORA_FIN") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel" Width="70">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Cuota" ShowHeader="true" AccessibleHeaderText="Cuota"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbCuota" runat="server" Text='<%# Eval("CUOTA") %>' ToolTip='<%# Eval("CUOTA") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel" Width="70">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Monitor" ShowHeader="true" AccessibleHeaderText="Monitor"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbMonitor" runat="server" Text='<%# Eval("MONITOR.NOMBRE") %>' ToolTip='<%# Eval("MONITOR.NOMBRE") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel medio" Width="200">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -111,23 +106,21 @@
 
                 <div class="row">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="overflow: auto">
                         <asp:GridView ID="gvDescuento" runat="server" AllowSorting="false" AutoGenerateColumns="false" BorderStyle="Outset" BorderWidth="1"
                             EmptyDataRowStyle-VerticalAlign="Middle" Enabled="false"
                             EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." Width="100%" CssClass="Grid" AccessKey="G">
                             <Columns>
                                 <asp:TemplateField HeaderText="Descuento" ShowHeader="true" AccessibleHeaderText="Descuento"
-                                    ControlStyle-Width="250" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="250" />
+                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCortadoDoc" runat="server" Text='<%# Eval("DESCUENTO.NOMBRE") %>' ToolTip='<%# Eval("DESCUENTO.NOMBRE") %>'
-                                            Width="250">
+                                             CssClass="acortaLabel largo" Width="250">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Valor" ShowHeader="true" AccessibleHeaderText="Valor"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbValor" runat="server" Text='<%# Eval("VALOR") %>' ToolTip='<%# Eval("VALOR") %>'
                                             Width="100">

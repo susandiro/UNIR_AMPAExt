@@ -11,6 +11,7 @@ public partial class Masters_SiteAdministracion : MasterPageBase
     /// <param name="e"></param>
     protected override void OnInit(EventArgs e)
     {
+        log4net.Config.XmlConfigurator.Configure();
         if (!Page.IsPostBack)
         {
             bool borrarFiltro = string.IsNullOrEmpty(Request["grid"]) || Request["grid"] == "N"; //Si no tenemos el queryString o su valor es N, borramos el filtro de sesión
@@ -36,12 +37,13 @@ public partial class Masters_SiteAdministracion : MasterPageBase
             base.Page_Load(sender, e);
             menuCabecera.Visible = VerCabecera;
             menuHorizontal.Visible = VerBotonera;
-
-            //Establecer los menús a los que se tiene acceso. si es de extranet, no puede entrar
+            menuUsuario.Visible = (DatosSesionLogin.CodTipoUsuario == AMPAExt.Comun.TipoDatos.TipoUsuario.AMPA);
+            menuSocios.Visible = (DatosSesionLogin.CodTipoUsuario == AMPAExt.Comun.TipoDatos.TipoUsuario.AMPA);
+            //Se establecen los menús a los que se tiene acceso. si es de empresa, no puede entrar
             if (DatosSesionLogin.CodTipoUsuario != AMPAExt.Comun.TipoDatos.TipoUsuario.AMPA)
             {
                 Session.Clear();
-                Response.Redirect("~/UI/Login.aspx", false);
+                Response.Redirect(RelativeURL + "Login.aspx", false);
             }
 
             //Poner el nombre del usuario en la cabacera
@@ -55,17 +57,5 @@ public partial class Masters_SiteAdministracion : MasterPageBase
         }
 
     }
-
-    /// <summary>
-    /// Evento que se desencadena al pulsar desconectar
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void Desconectar(object sender, EventArgs e)
-    {
-        Session.Clear();
-        Response.Redirect("~/UI/Login.aspx", false);
-    }
-
     #endregion
 }

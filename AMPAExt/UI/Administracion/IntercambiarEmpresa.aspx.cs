@@ -53,28 +53,7 @@ namespace AMPAExt.UI.Administracion
                 USUARIO_AMPA nuevoUsuario = new USUARIO_AMPA();
                 if (ValidarFormulario())
                 {
-                    //Se guardan los alumnos que hay en origen
-                    List<ALUMNO_ACTIVIDAD> alumnosOrigen = NegActividad.GetAlumnnosByActividad(int.Parse(cmbActividadOri.SelectedValue));
-
-                    //Se insertan los alumnos de origen en actividad y hoario de destino
-                    foreach (ALUMNO_ACTIVIDAD alumno in alumnosOrigen)
-                        if (NegActividad.AltaAlumnoHorario(alumno)<1)
-                            throw new Exception("Error al dar de alta al alumno");
-                   //TODO:METERLO EN NEGOCIO EN TRANSACCION
-                    //Se eliminan loas alumnos de la actividad  y hoario de origen
-                    //Se eliminan los horarios de la actividad  y hoario de origen
-                    //Se pone como activo N la actividad  y hoario origen
-
-                    ACTIVIDAD origenActividad = NegActividad.GetActividadById(int.Parse(cmbActividadOri.SelectedValue));
-                    ACTIVIDAD destinoActividad = NegActividad.GetActividadById(int.Parse(cmbActividadDes.SelectedValue));
-                    origenActividad.ID_EMPRESA = destinoActividad.ID_EMPRESA;
-                    origenActividad.NOMBRE = destinoActividad.NOMBRE;
-                    origenActividad.DESCRIPCION = destinoActividad.DESCRIPCION;
-                    origenActividad.FECHA_MOD = DateTime.Now;
-                    origenActividad.OBSERVACIONES = destinoActividad.OBSERVACIONES;
-                    origenActividad.USUARIO = MasterBase.DatosSesionLogin.DatosUsuario;
-
-                    if (NegActividad.CambiarActividadEmpresa(origenActividad))
+                    if (NegActividad.IntercambiarEmpresa(int.Parse(cmbHorarioOri.SelectedValue), int.Parse(cmbHorarioDes.SelectedValue), MasterBase.DatosSesionLogin.DatosUsuario))
                     {
                         VaciarFormulario(this);
                         PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Success, "La actividad se ha intercambiardo correctamente");

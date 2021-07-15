@@ -52,7 +52,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
 
@@ -99,8 +99,6 @@ namespace AMPAExt.UI.Extraescolar
                     cmbEmpresa.Items.Add(new ListItem("-- Seleccione --", ""));
                     foreach (EMPRESA_AMPA empresa in listado)
                         cmbEmpresa.Items.Add(new ListItem(empresa.EMPRESA.NOMBRE, empresa.ID_EMPRESA.ToString()));
-                    //cmbEmpresa.DataSource = ((PageBase)Page).NegUsuario.GetEmpresasByAMPA(MasterBase.DatosSesionLogin.IdEmpresa, true);
-                    //cmbEmpresa.DataBind();
                 }
             }
             catch (Exception ex)
@@ -203,7 +201,7 @@ namespace AMPAExt.UI.Extraescolar
                                 if (!NegExtraescolar.BajaUsuario(idUsuario, idEmpresa))
                                 {
                                     Comun.Log.TrazaLog.Error("No se ha podido dar de baja el usuario " + idUsuario.ToString());
-                                    Error("Se ha producido un error al intentar dar de baja al usuario para la empresa");
+                                    ErrorGeneral("Se ha producido un error al intentar dar de baja al usuario para la empresa");
                                     return;
                                 }
                             }
@@ -269,7 +267,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }

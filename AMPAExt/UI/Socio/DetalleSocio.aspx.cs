@@ -57,7 +57,7 @@ namespace AMPAExt.UI.Socio
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el formulario", ex);
-                Error("Se ha producido un error al cargar los datos del formulario");
+                ErrorGeneral("Se ha producido un error al cargar los datos del formulario");
             }
         }
 
@@ -102,7 +102,8 @@ namespace AMPAExt.UI.Socio
                 txtNombre2.Text = datosTutor.T2_NOMBRE;
                 txtApellido1_2.Text = datosTutor.T2_APELLIDO1;
                 txtApellido2_2.Text = datosTutor.T2_APELLIDO2;
-                txtTipoDocumento2.Text = datosTutor.TIPO_DOCUMENTO1.NOMBRE;
+                if (datosTutor.TIPO_DOCUMENTO1 != null)
+                    txtTipoDocumento2.Text = datosTutor.TIPO_DOCUMENTO1.NOMBRE;
                 txtNumDocumento2.Text = datosTutor.T2_NUMERO_DOCUMENTO;
                 txtTelefono2.Text = datosTutor.T2_TELEFONO;
                 txtemail2.Text = datosTutor.T2_EMAIL;

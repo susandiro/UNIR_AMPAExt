@@ -44,6 +44,12 @@ namespace AMPAExt.UI.Extraescolar
                     CargarActivo();
                     if (FiltroInicial != null)
                         CargarFiltro();
+                    else
+                    {
+                        FiltroInicial = new Comun.FiltroUsuario();
+                        FiltroInicial.Activo = "S";
+                        CargarFiltro();
+                    }
                     Session["IdEmpresa"] = null;
                     CargarGrid();
                 }
@@ -51,7 +57,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
 
@@ -68,6 +74,7 @@ namespace AMPAExt.UI.Extraescolar
             {
                 txtNIF.Text = string.Empty;
                 txtNombre.Text = string.Empty;
+                cmbActivo.ClearSelection();
                 Session.Remove("FiltroUsuario");
                 CargarGrid();
             }
@@ -96,16 +103,7 @@ namespace AMPAExt.UI.Extraescolar
         }
 
         #region Eventos del grid
-        /// <summary>
-        /// Recarga el grid después de la paginación.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void gridPaginacion_RecargarGrid(object sender, EventArgs e)
-        {
-            //FiltroInicial.Paginacion = gridPaginacion.Paginacion;
-            //CargarGrid();
-        }
+      
         /// <summary>
         /// Procedimiento de la grid, al crear una fila
         /// </summary>
@@ -115,6 +113,12 @@ namespace AMPAExt.UI.Extraescolar
             {
                 e.Row.Attributes.Add("onmouseover", "this.style.background='#FFF0A2'");
                 e.Row.Attributes.Add("onmouseout", "this.style.background='#FFFFFF'");
+                //Si no está activa, no se puede ni modificar ni eliminar
+                if (gvEmpresas.DataKeys[e.Row.RowIndex].Value.ToString() == "N")
+                {
+                    e.Row.FindControl("imgModiUsu").Visible = false;
+                    e.Row.FindControl("imgBorrarUsu").Visible = false;
+                }
             }
         }
 
@@ -140,13 +144,12 @@ namespace AMPAExt.UI.Extraescolar
                     case "Baja":
                         try
                         {
-                            //TODO:FAlta esto
-                                if (!NegUsuario.BajaUsuarioAMPA(idEmpresa, MasterBase.DatosSesionLogin.IdEmpresa))
-                                {
-                                    Comun.Log.TrazaLog.Error("No se ha podido dar de baja el usuario " + idEmpresa.ToString());
-                                    Error("Se ha producido un error al intentar dar de baja al usuario para la AMPA");
-                                    return;
-                                }
+                            if (!NegExtraescolar.BajaEmpresa(idEmpresa, MasterBase.DatosSesionLogin.IdEmpresa, MasterBase.DatosSesionLogin.DatosUsuario))
+                            {
+                                Comun.Log.TrazaLog.Error("No se ha podido dar de baja la empresa " + idEmpresa.ToString() + " para la AMPA " + MasterBase.DatosSesionLogin.IdEmpresa.ToString());
+                                ErrorGeneral("Se ha producido un error al intentar dar de baja la empresa en la AMPA");
+                                return;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -197,7 +200,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }
@@ -217,7 +220,6 @@ namespace AMPAExt.UI.Extraescolar
 
                 if (!string.IsNullOrEmpty(filtro.Activo))
                     cmbActivo.SelectedValue = filtro.Activo;
-
             }
             catch (Exception ex)
             {
@@ -254,8 +256,8 @@ namespace AMPAExt.UI.Extraescolar
         {
             cmbActivo.Items.Clear();
             cmbActivo.Items.Add(new ListItem("-- Seleccione --", ""));
-            cmbActivo.Items.Add(new ListItem("S", "S"));
-            cmbActivo.Items.Add(new ListItem("N", "N"));
+            cmbActivo.Items.Add(new ListItem("Sí", "S"));
+            cmbActivo.Items.Add(new ListItem("No", "N"));
         }
     }
 }

@@ -268,6 +268,53 @@ namespace AMPAExt.Negocio
         {
             return ExtraescolarDat.BajaMonitor(idMonitor, idEmpresa);
         }
+        /// <summary>
+        /// Realiza la baja de una empresa para una AMPA poniendo activo = N
+        /// </summary>
+        /// <param name="idEmpresa">Identificador de la empresa</param>
+        /// <param name="idAMPA">Identificador de la AMPA a la que pertenece la empresa</param>
+        /// <param name="usuarioAccion">Usuario que realiza la baja</param>
+        /// <returns>Booleano con el resultado: true si ha ido todo bien; false en caso contrario</returns>
+        public bool BajaEmpresa(int idEmpresa, int idAMPA, string usuarioAccion)
+        {
+            
+            FiltroActividad filtro = new FiltroActividad();
+            filtro.IdEmpresa = idEmpresa;
+            filtro.IdAMPA = idAMPA;
+            bool resultado = false;
+            using (AMPAEXTBD conn = new AMPAEXTBD())
+            {
+                using (DbContextTransaction transaccion = conn.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        List<ACTIVIDAD> actividades = ActividadDat.GetActividades(filtro);
+                        List<ALUMNO_ACTIVIDAD> alumnos;
+                        //Comprueba si hay alumnos en las actividades extrescolares y si los hay, los borra
+                        foreach (ACTIVIDAD act in actividades)
+                        {
+                            alumnos = ActividadDat.GetAlumnnosByActividad(act.ID_ACTIVIDAD, conn);
+                            foreach (ALUMNO_ACTIVIDAD alumno in alumnos)
+                                if (!ActividadDat.BajaAlumnoHorario(alumno.ID_ALUM_ACT, conn))
+                                    throw new Exception("No se ha podido dar de baja el alumno " + alumno.ID_ALUMNO.ToString() + " en la actividad horario " + alumno.ID_ACT_HORARIO.ToString());
+                        }
+                        //Da de baja a la empresa para la AMPA
+                        if (!ExtraescolarDat.BajaEmpresa(idEmpresa, idAMPA, usuarioAccion, conn))
+                            throw new Exception("No se ha podido dar de baja la empresa " + idEmpresa.ToString() + ", para la AMPA " + idAMPA.ToString() + ", con el usuario " + usuarioAccion);
+                        resultado = true;
+                        transaccion.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaccion.Rollback();
+                        Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".BajaEmpresa(). idEmpresa: " + idEmpresa.ToString() + ", idAMPA: " + idAMPA.ToString(), ex);
+                        throw;
+                    }
+                }
+            }
+            return resultado;
+
+        }
         #endregion
 
     }

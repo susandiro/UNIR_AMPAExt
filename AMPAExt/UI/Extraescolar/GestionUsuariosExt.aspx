@@ -44,7 +44,7 @@
                                 <label for="<%= txtTelefono.ClientID %>">Teléfono:</label>
                             </div>
                             <div class="col-md-4">
-                                <asp:TextBox ID="txtTelefono" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtTelefono" MaxLength="15" runat="server"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row" id="dvEmpresa" runat="server">
@@ -81,65 +81,66 @@
                         EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." CssClass="Grid" AccessKey="G">
                         <Columns>
                             <asp:TemplateField HeaderText=" " ShowHeader="False">
+                                <HeaderStyle Width="50" />
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgDetalleUsu" runat="server" CommandArgument='<%# Eval("ID_USUARIO_EMP") %>' CommandName="Consulta" CausesValidation="false" ToolTip="Consultar usuario" ImageUrl="~/Content/Imagenes/lupa.png" />
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="center" Wrap="false" Height="26px" Width="25px" />
+                                <ItemStyle HorizontalAlign="center" Wrap="false"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText=" " ShowHeader="False">
+                                <HeaderStyle Width="50" />
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgModiUsu" runat="server" CommandArgument='<%# Eval("ID_USUARIO_EMP") %>' CommandName="Modificar" CausesValidation="false" ToolTip="Modificar usuario" ImageUrl="~/Content/Imagenes/pencil.png" />
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="center" Wrap="false" Height="26px" Width="25px" />
+                                <ItemStyle HorizontalAlign="center" Wrap="false"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText=" " ShowHeader="False">
+                                <HeaderStyle Width="50" />
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgBorrarUsu" runat="server" CommandArgument='<%# string.Concat(Eval("ID_USUARIO_EMP"), ",", Eval("ID_EMPRESA")) %>' CommandName="Baja" CausesValidation="false" ToolTip="Baja del usuario" OnClientClick="if(!confirm('Se va a dar de baja al usuario de la empresa, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="center" Wrap="false" Height="26px" Width="25px" />
+                                <ItemStyle HorizontalAlign="center" Wrap="false" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Documento" ShowHeader="true" AccessibleHeaderText="Documento"
-                                ControlStyle-Width="110" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                <HeaderStyle Width="110" />
-                                <ItemTemplate>
+                                ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
+                                  <ItemTemplate>
                                     <asp:Label ID="lblCortadoDoc" runat="server" Text='<%# string.Concat(Eval("TIPO_DOCUMENTO.NOMBRE"), ": ", Eval("NUMERO_DOCUMENTO")) %>' ToolTip='<%# string.Concat(Eval("TIPO_DOCUMENTO.NOMBRE"), ": ", Eval("NUMERO_DOCUMENTO")) %>'
-                                        CssClass="acortaLabel documento" Width="110">
+                                        CssClass="acortaLabel corto" Width="150">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Nombre" ShowHeader="true" AccessibleHeaderText="Nombre"
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                <HeaderStyle Width="250" />
-                                <ItemTemplate>
+                               <ItemTemplate>
                                     <asp:Label ID="lbNombre" runat="server" Text='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>' ToolTip='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>'
-                                        CssClass="acortaLabel nombre" Width="250">
+                                        CssClass="acortaLabel largo" Width="250">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Empresa" ShowHeader="true" AccessibleHeaderText="Empresa"
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                <HeaderStyle Width="250" />
+                               
                                 <ItemTemplate>
                                     <asp:Label ID="lbEmpresa" runat="server" Text='<%# Eval("EMPRESA.NOMBRE") %>' ToolTip='<%# Eval("EMPRESA.NOMBRE") %>'
-                                        CssClass="acortaLabel nombre" Width="250">
+                                        CssClass="acortaLabel largo" Width="250">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Teléfono" ShowHeader="true" AccessibleHeaderText="Teléfono"
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                <HeaderStyle Width="150" />
+                               
                                 <ItemTemplate>
                                     <asp:Label ID="lbTelefono" runat="server" Text='<%# Eval("TELEFONO") %>' ToolTip='<%# Eval("TELEFONO") %>'
-                                        CssClass="acortaLabel solicitante" Width="150">
+                                        CssClass="acortaLabel corto" Width="150">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Correo electrónico" ShowHeader="true" AccessibleHeaderText="Teléfono"
                                 ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                <HeaderStyle Width="150" />
+                                
                                 <ItemTemplate>
                                     <asp:Label ID="lbEmail" runat="server" Text='<%# Eval("EMAIL") %>' ToolTip='<%# Eval("EMAIL") %>'
-                                        CssClass="acortaLabel solicitante" Width="150">
+                                        CssClass="acortaLabel medio" Width="200">
                                     </asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>

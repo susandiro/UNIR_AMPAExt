@@ -428,25 +428,74 @@ namespace AMPAExt.Modelo
         public bool BajaMonitor(int idMonitor, int idEmpresa)
         {
             bool resultado = false;
+            using (AMPAEXTBD conn = new AMPAEXTBD())
+            {
+                using (DbContextTransaction transaccion = conn.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        //Primero se pone a null las actividades horario que tenga el monitor
+                        List<ACTIVIDAD_HORARIO> actividades = conn.ACTIVIDAD_HORARIO
+                        .Where(c => c.ID_MONITOR == idMonitor && c.ACTIVIDAD.EMPRESA.ID_EMPRESA==idEmpresa).ToList();
+                        foreach (ACTIVIDAD_HORARIO act in actividades)
+                        {
+                            act.ID_MONITOR = null;
+                            conn.Entry(act).State = EntityState.Modified;
+                            conn.SaveChanges();
+                        }
+
+                        MONITOR monitor = conn.MONITOR
+                           .Where(c => c.ID_MONITOR == idMonitor && c.ID_EMPRESA == idEmpresa)
+                         .FirstOrDefault();
+
+                        if (monitor == null)
+                            throw new Exception("El monitor " + idMonitor.ToString() + " no se encuentra como monitor de la empresa " + idEmpresa.ToString());
+
+                        conn.MONITOR.Remove(monitor);
+                        conn.SaveChanges();
+                        resultado = true;
+                        transaccion.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaccion.Rollback();
+                        Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".BajaMonitor(). idMonitor: " + idMonitor.ToString() + ", idEmpresa: " + idEmpresa.ToString(), ex);
+                    }
+                }
+            }
+            return resultado;
+        }
+
+        /// <summary>
+        /// Realiza la baja de una empresa extraescolara para una AMPA
+        /// </summary>
+        /// <param name="idEmpresa">Identificador de la empresa</param>
+        /// <param name="idAMPA">Identificador de la AMPA a la que pertenece la empresa</param>
+        /// <param name="usuarioAccion">Usuario que realiza la baja</param>
+        /// <param name="conn">Conexión abierta para realizar la acción</param>
+        /// <returns>Booleano con el resultado: true si ha ido todo bien; false en caso contrario</returns>
+        public bool BajaEmpresa(int idEmpresa, int idAMPA, string usuarioAccion, AMPAEXTBD conn)
+        {
+            bool resultado = false;
             try
             {
-                using (AMPAEXTBD conn = new AMPAEXTBD())
-                {
-                    MONITOR monitor = conn.MONITOR
-                       .Where(c => c.ID_MONITOR == idMonitor && c.ID_EMPRESA == idEmpresa)
+                    EMPRESA_AMPA empresa = conn.EMPRESA_AMPA
+                       .Where(c => c.ID_EMPRESA == idEmpresa && c.ID_AMPA == idAMPA)
                      .FirstOrDefault();
 
-                    if (monitor == null)
-                        throw new Exception("El usuario " + idMonitor.ToString() + " no se encuentra como monitor de la empresa " + idEmpresa.ToString());
+                    if (empresa == null)
+                        throw new Exception("La empresa " + idEmpresa.ToString() + " no se encuentra de alta para la AMPA " + idAMPA.ToString());
 
-                    conn.MONITOR.Remove(monitor);
-                    conn.SaveChanges();
-                    resultado = true;
-                }
+                empresa.USUARIO = usuarioAccion;
+                empresa.FECHA_MOD = DateTime.Now;
+                empresa.ACTIVO = "N";
+                conn.SaveChanges();
+                resultado = true;
             }
             catch (Exception ex)
             {
-                Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".BajaMonitor(). idMonitor: " + idMonitor.ToString() + ", idEmpresa: " + idEmpresa.ToString(), ex);
+                Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".BajaEmpresa(). idEmpresa: " + idEmpresa.ToString() + ", idAMPA: " + idAMPA.ToString() + ", usuarioAccion: " + usuarioAccion, ex);
+                throw;
             }
             return resultado;
         }

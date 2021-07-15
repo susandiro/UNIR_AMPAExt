@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <!DOCTYPE html>
-<html lang="es-es" xml:lang="es-ES">
+<html lang="es-ES" xml:lang="es-ES">
 <head runat="server">
     <title>Registro AMPA y Extraescolares</title>
     <base target="_self" />

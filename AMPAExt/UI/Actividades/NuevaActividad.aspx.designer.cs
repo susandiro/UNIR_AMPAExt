@@ -33,6 +33,15 @@ namespace AMPAExt.UI.Actividades
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control upActividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upActividad;
+
+        /// <summary>
         /// Control PanelInfo.
         /// </summary>
         /// <remarks>
@@ -139,15 +148,6 @@ namespace AMPAExt.UI.Actividades
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblActHorario;
-
-        /// <summary>
-        /// Control upActividad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upActividad;
 
         /// <summary>
         /// Control chkDias.

@@ -11,6 +11,7 @@ public partial class Masters_SiteExtraescolar : MasterPageBase
     /// <param name="e"></param>
     protected override void OnInit(EventArgs e)
     {
+        log4net.Config.XmlConfigurator.Configure();
         if (!Page.IsPostBack)
         {
             bool borrarFiltro = string.IsNullOrEmpty(Request["grid"]) || Request["grid"] == "N"; //Si no tenemos el queryString o su valor es N, borramos el filtro de sesión
@@ -38,7 +39,8 @@ public partial class Masters_SiteExtraescolar : MasterPageBase
             base.Page_Load(sender, e);
             menuCabecera.Visible = VerCabecera;
             menuHorizontal.Visible = VerBotonera;
-
+            menuUsuario.Visible = (DatosSesionLogin.CodTipoUsuario == AMPAExt.Comun.TipoDatos.TipoUsuario.AMPA);
+            menuSocios.Visible = (DatosSesionLogin.CodTipoUsuario == AMPAExt.Comun.TipoDatos.TipoUsuario.AMPA);
             //Establecer los menús a los que se tiene acceso. si es de extranet, no puede entrar
             lAltaUsu.Visible = true;
             lGestionUsu.Visible = true;
@@ -58,7 +60,6 @@ public partial class Masters_SiteExtraescolar : MasterPageBase
                 lManten.Visible = true;
              }
 
-
             //Poner el nombre del usuario en la cabacera
             if (DatosSesionLogin != null)
             {
@@ -71,17 +72,5 @@ public partial class Masters_SiteExtraescolar : MasterPageBase
 
     }
 
-    /// <summary>
-    /// Evento que se desencadena al pulsar desconectar
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void Desconectar(object sender, EventArgs e)
-    {
-        Session.Clear();
-        Response.Redirect("~/UI/Login.aspx", false);
-    }
-
     #endregion
-    
 }

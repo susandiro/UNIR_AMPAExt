@@ -41,7 +41,7 @@
                         <label for="txtTelefono">Teléfono:</label>
                     </div>
                     <div class="col-md-7">
-                        <asp:TextBox ID="txtTelefono" runat="server" ToolTip="Teléfono de contacto de la empresa extraescolar" ReadOnly="true" />
+                        <asp:TextBox ID="txtTelefono" runat="server" MaxLength="15" ToolTip="Teléfono de contacto de la empresa extraescolar" ReadOnly="true" />
                     </div>
                     <div class="col-md-2"></div>
                 </div>

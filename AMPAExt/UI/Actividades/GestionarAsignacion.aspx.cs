@@ -12,6 +12,7 @@ namespace AMPAExt.UI.Actividades
     /// </summary>
     public partial class GestionarAsignacion : PageBase
     {
+        #region propiedades
         /// <summary>
         /// Propiedad con el mensaje de comunicación para el control
         /// </summary>
@@ -21,6 +22,9 @@ namespace AMPAExt.UI.Actividades
         /// Identificador del alumno
         /// </summary>
         public int IdAlumno { get; set; }
+        #endregion
+
+        #region Eventos
         /// <summary>
         /// Antes de que se carge la página se define que se compruebe los si necesita estar logado
         /// </summary>
@@ -80,6 +84,48 @@ namespace AMPAExt.UI.Actividades
                 PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "Se ha producido un error al dar de alta al alumno en la actividad extraescolar");
             }
         }
+
+        /// <summary>
+        /// Al seleccionar la empresa, se cargan las actividades que imparte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbEmpresa.SelectedValue))
+            {
+                CargarActividades(int.Parse(cmbEmpresa.SelectedValue));
+                cmbActividad.Enabled = true;
+            }
+            else
+            {
+                cmbActividad.Items.Clear();
+                cmbActividad.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Al seleccionar la actividad, se cargan los horarios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbActividad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbActividad.SelectedValue))
+            {
+                CargarHorario(int.Parse(cmbActividad.SelectedValue));
+                cmbHorario.Enabled = true;
+            }
+            else
+            {
+                cmbHorario.Items.Clear();
+                cmbHorario.Enabled = false;
+            }
+        }
+        #endregion
+
+        #region Carga de datos
+
         /// <summary>
         /// Carga el combo de la interface con el listado de empresas para origen del sistema
         /// </summary>
@@ -97,7 +143,11 @@ namespace AMPAExt.UI.Actividades
                         cmbEmpresa.Items.Add(new ListItem(empresa.EMPRESA.NOMBRE, empresa.ID_EMPRESA.ToString()));
                 }
                 else
+                {
                     cmbEmpresa.Items.Add(new ListItem(MasterBase.DatosSesionLogin.Empresa, MasterBase.DatosSesionLogin.IdEmpresa.ToString()));
+                    cmbEmpresa.Enabled = false;
+                    CargarActividades(MasterBase.DatosSesionLogin.IdEmpresa);
+                }
             }
             catch (Exception ex)
             {
@@ -153,93 +203,6 @@ namespace AMPAExt.UI.Actividades
         }
 
         /// <summary>
-        /// Valida que los campos obligatorios hayan sido rellenados.
-        /// </summary>
-        /// <returns>True si los datos obligatorios han sido rellenos
-        /// False en caso de que alguno no haya sido relleno</returns>
-        private bool ValidarFormulario()
-        {
-
-            lblEmpresa.Visible = false;
-            lblActividad.Visible = false;
-            lblHorario.Visible = false;
-            _mensaje.Clear();
-            
-            if (string.IsNullOrWhiteSpace(cmbEmpresa.SelectedValue))
-            {
-                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar la empresa de la actividad extraescolar</li>");
-                lblEmpresa.Visible = true;
-                if (_mensaje == null)
-                    cmbEmpresa.Focus();
-            }
-            if (string.IsNullOrWhiteSpace(cmbActividad.SelectedValue))
-            {
-                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar la actividad extraescolar</li>");
-                lblActividad.Visible = true;
-                if (_mensaje == null)
-                    cmbActividad.Focus();
-            }
-            if (string.IsNullOrWhiteSpace(cmbHorario.SelectedValue))
-            {
-                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar el horario de la actividad extraescolar</li>");
-                lblHorario.Visible = true;
-                if (_mensaje == null)
-                    cmbHorario.Focus();
-            }
-            return _mensaje.Length == 0;
-        }
-
-        /// <summary>
-        /// Inicializa los valores de la actividad
-        /// </summary>
-        private void VaciarFormularioActividad()
-        {
-            cmbEmpresa.ClearSelection();
-            cmbActividad.ClearSelection();
-            cmbActividad.Enabled = false;
-            cmbHorario.ClearSelection();
-            cmbHorario.Enabled = false;
-        }
-
-        /// <summary>
-        /// Al seleccionar la empresa, se cargan las actividades que imparte
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbEmpresa.SelectedValue))
-            {
-                CargarActividades(int.Parse(cmbEmpresa.SelectedValue));
-                cmbActividad.Enabled = true;
-            }
-            else
-            {
-                cmbActividad.Items.Clear();
-                cmbActividad.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Al seleccionar la actividad, se cargan los horarios
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void cmbActividad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbActividad.SelectedValue))
-            {
-                CargarHorario(int.Parse(cmbActividad.SelectedValue));
-                cmbHorario.Enabled = true;
-            }
-            else
-            {
-                cmbHorario.Items.Clear();
-                cmbHorario.Enabled = false;
-            }
-        }
-
-        /// <summary>
         /// Carga el combo de la interface con el listado actividades de la empresa
         /// </summary>
         /// <param name="IdEmpresa">Identificador de la empresa a la que pertenecen las actividades</param>
@@ -248,8 +211,18 @@ namespace AMPAExt.UI.Actividades
             try
             {
                 Comun.FiltroActividad filtro = new Comun.FiltroActividad();
-                filtro.IdEmpresa = IdEmpresa;
-                filtro.IdAMPA = MasterBase.DatosSesionLogin.IdEmpresa;
+                if (MasterBase.DatosSesionLogin.CodTipoUsuario == Comun.TipoDatos.TipoUsuario.AMPA)
+                {
+                    filtro.IdEmpresa = IdEmpresa;
+                    filtro.IdAMPA = MasterBase.DatosSesionLogin.IdEmpresa;
+                }
+                else
+                {
+                    filtro.IdEmpresa = MasterBase.DatosSesionLogin.IdEmpresa;
+                    ALUMNO datosAlumno= NegActividad.GetAMPAByAlumno(IdAlumno);
+                    if (datosAlumno!=null && datosAlumno.TUTOR != null && datosAlumno.TUTOR.AMPA!=null)
+                        filtro.IdAMPA = datosAlumno.TUTOR.AMPA.ID_AMPA;
+                }
                 filtro.Activo = "S";
                 cmbActividad.DataSource = ((PageBase)Page).NegActividad.GetActividades(filtro);
                 cmbActividad.DataBind();
@@ -286,6 +259,63 @@ namespace AMPAExt.UI.Actividades
             }
         }
 
+        #endregion
+
+        #region Métodos privados
+        /// <summary>
+        /// Valida que los campos obligatorios hayan sido rellenados.
+        /// </summary>
+        /// <returns>True si los datos obligatorios han sido rellenos
+        /// False en caso de que alguno no haya sido relleno</returns>
+        private bool ValidarFormulario()
+        {
+            lblEmpresa.Visible = false;
+            lblActividad.Visible = false;
+            lblHorario.Visible = false;
+            _mensaje.Clear();
+
+            if (string.IsNullOrWhiteSpace(cmbEmpresa.SelectedValue))
+            {
+                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar la empresa de la actividad extraescolar</li>");
+                lblEmpresa.Visible = true;
+                if (_mensaje == null)
+                    cmbEmpresa.Focus();
+            }
+            if (string.IsNullOrWhiteSpace(cmbActividad.SelectedValue))
+            {
+                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar la actividad extraescolar</li>");
+                lblActividad.Visible = true;
+                if (_mensaje == null)
+                    cmbActividad.Focus();
+            }
+            if (string.IsNullOrWhiteSpace(cmbHorario.SelectedValue))
+            {
+                _mensaje.AppendLine("<li type='dic'>Es obligatorio indicar el horario de la actividad extraescolar</li>");
+                lblHorario.Visible = true;
+                if (_mensaje == null)
+                    cmbHorario.Focus();
+            }
+            return _mensaje.Length == 0;
+        }
+
+        /// <summary>
+        /// Inicializa los valores de la actividad
+        /// </summary>
+        private void VaciarFormularioActividad()
+        {
+            if (MasterBase.DatosSesionLogin.CodTipoUsuario == Comun.TipoDatos.TipoUsuario.AMPA)
+            {
+                cmbEmpresa.ClearSelection();
+                cmbActividad.ClearSelection();
+                cmbActividad.Enabled = false;
+            }
+            else
+                cmbActividad.ClearSelection();
+            cmbHorario.ClearSelection();
+            cmbHorario.Enabled = false;
+        }
+        #endregion
+
         #region Eventos del grid
 
         /// <summary>
@@ -317,7 +347,7 @@ namespace AMPAExt.UI.Actividades
                             if (!NegActividad.BajaAlumnoActividad(IdAlumno,idActividad))
                             {
                                 Comun.Log.TrazaLog.Error("No se ha podido dar de baja al alumno en la extraescolar. IdAlumno " + IdAlumno.ToString() + ", IdActividadHorario: " + idActividad.ToString());
-                                Error("Se ha producido un error al intentar dar de baja al alumno en la actividad extraescolar");
+                                ErrorGeneral("Se ha producido un error al intentar dar de baja al alumno en la actividad extraescolar");
                                 return;
                             }
                         }

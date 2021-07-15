@@ -49,7 +49,7 @@
                         <label for="txtTelefono">Teléfono <span style="color: red">*</span>:</label>
                     </div>
                     <div class="col-md-7">
-                        <asp:TextBox ID="txtTelefono" runat="server" ToolTip="Teléfono de contacto de la empresa extraescolar" CssClass="txtObligatorio" />
+                        <asp:TextBox ID="txtTelefono" runat="server" MaxLength="15"  ToolTip="Teléfono de contacto de la empresa extraescolar" CssClass="txtObligatorio" />
                     </div>
                     <div class="col-md-2">
                         <asp:Label ID="lblTelefono" runat="server" Text="Obligatorio" CssClass="errorValid" Visible="false"></asp:Label>

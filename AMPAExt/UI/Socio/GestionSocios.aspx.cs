@@ -51,7 +51,7 @@ namespace AMPAExt.UI.Socios
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
 
@@ -160,7 +160,7 @@ namespace AMPAExt.UI.Socios
                             if (!NegSocio.BajaSocio(idSocio))
                             {
                                 Comun.Log.TrazaLog.Error("No se ha podido dar de baja el socio " + idSocio.ToString());
-                                Error("Se ha producido un error al intentar dar de baja al socio en la AMPA");
+                                ErrorGeneral("Se ha producido un error al intentar dar de baja al socio en la AMPA");
                                 return;
                             }
                         }
@@ -218,7 +218,7 @@ namespace AMPAExt.UI.Socios
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }

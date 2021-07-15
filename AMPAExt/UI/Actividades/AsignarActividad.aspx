@@ -78,8 +78,7 @@
                                 <asp:TemplateField HeaderText="Nombre del alumno" ShowHeader="true" AccessibleHeaderText="Nombre"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
-                                        <asp:Label ID="lbnombre" runat="server" Text='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>' ToolTip='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>'
-                                            >
+                                        <asp:Label ID="lbnombre" runat="server" Text='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>' ToolTip='<%# string.Concat(Eval("NOMBRE"), " ", Eval("APELLIDO1"), " ", Eval("APELLIDO2")) %>'>
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>

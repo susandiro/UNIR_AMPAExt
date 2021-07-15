@@ -93,17 +93,17 @@ namespace AMPAExt.UI.Extraescolar
                     nuevoMonitor.FECHA_MOD = DateTime.Now;
 
                     if (NegExtraescolar.ModificarMonitor(nuevoMonitor))
-                        PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Success, "El usuario se ha modificado correctamente");
+                        PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Success, "El monitor se ha modificado correctamente");
                     else
-                        PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "Se ha producido un error al modificar el usuario");
+                        PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "Se ha producido un error al modificar el monitor");
                 }
                 else
                     PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, _mensaje.ToString());
             }
             catch (Exception ex)
             {
-                Comun.Log.TrazaLog.Error("Error al modificar el usuario.", ex);
-                PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "Se ha producido un error al modificar al usuario");
+                Comun.Log.TrazaLog.Error("Error al modificar el monitor.", ex);
+                PanelInfo.MostrarMensaje(Comun.TipoDatos.TipoError.Error, "Se ha producido un error al modificar el monitor");
             }
         }
 

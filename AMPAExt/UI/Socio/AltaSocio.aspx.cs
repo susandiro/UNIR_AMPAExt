@@ -60,7 +60,7 @@ namespace AMPAExt.UI.Socio
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el formulario", ex);
-                Error("Se ha producido un error al cargar los datos del formulario");
+                ErrorGeneral("Se ha producido un error al cargar los datos del formulario");
             }
         }
 

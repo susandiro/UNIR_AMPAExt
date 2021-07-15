@@ -51,7 +51,7 @@ namespace AMPAExt.UI.Administracion
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
 
@@ -74,7 +74,6 @@ namespace AMPAExt.UI.Administracion
                 Comun.Log.TrazaLog.Error("Error al obtener el listado de tipos de documento de la tabla maestra.", ex);
                 ScriptManager.RegisterStartupScript(Page, GetType(), "Usuario", "alert('Se ha producido un error al obtener el listado de tipos de documento');", true);
             }
-
         }
 
         #endregion
@@ -94,7 +93,6 @@ namespace AMPAExt.UI.Administracion
                 txtTelefono.Text = string.Empty;
                 Session.Remove("FiltroUsuario");
                 CargarGrid();
-              
             }
             catch (Exception ex)
             {
@@ -121,16 +119,6 @@ namespace AMPAExt.UI.Administracion
         }
 
         #region Eventos del grid
-        /// <summary>
-        /// Recarga el grid después de la paginación.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void gridPaginacion_RecargarGrid(object sender, EventArgs e)
-        {
-            //FiltroInicial.Paginacion = gridPaginacion.Paginacion;
-            //CargarGrid();
-        }
         /// <summary>
         /// Procedimiento de la grid, al crear una fila
         /// </summary>
@@ -176,7 +164,7 @@ namespace AMPAExt.UI.Administracion
                                 if (!NegUsuario.BajaUsuarioAMPA(idUsuario, MasterBase.DatosSesionLogin.IdEmpresa))
                                 {
                                     Comun.Log.TrazaLog.Error("No se ha podido dar de baja el usuario " + idUsuario.ToString());
-                                    Error("Se ha producido un error al intentar dar de baja al usuario para la AMPA");
+                                    ErrorGeneral("Se ha producido un error al intentar dar de baja al usuario para la AMPA");
                                     return;
                                 }
                             }
@@ -236,7 +224,7 @@ namespace AMPAExt.UI.Administracion
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }

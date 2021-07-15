@@ -9,6 +9,9 @@
         <form id="form1" runat="server">
             <asp:ScriptManager ID="ScriptManager1" runat="server" />
             <h1 class="tituloCentral">Nueva actividad extraescolar</h1>
+                            <asp:UpdatePanel runat="server" ID="upActividad">
+                    <ContentTemplate>
+
             <uc:PanelInformativo ID="PanelInfo" runat="server"></uc:PanelInformativo>
             <p class="espacioleft">Los campos marcados con <span class="errorValid">*</span> son obligatorios</p>
             <div class="espacioleft">
@@ -59,8 +62,7 @@
                 </div>
                 <h1 style="border-bottom: dotted; border-width: 1px; width: 80%; border-color: #316074; padding-top: 1.5em">Horario en que se imparte
                     <asp:Label ID="lblActHorario" runat="server" Text="Es obligatorio introducir al menos un horario" CssClass="errorValid" Visible="false"></asp:Label></h1>
-                <asp:UpdatePanel runat="server" ID="upActividad">
-                    <ContentTemplate>
+
                 <div class="row">
                     <div class="col-md-3">
                     </div>
@@ -132,54 +134,50 @@
                             OnRowCreated="gv_RowCreated" OnRowCommand="gvHorarios_RowCommand" EmptyDataRowStyle-VerticalAlign="Middle"
                             EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataText="No hay registros disponibles." Width="100%" CssClass="Grid" AccessKey="G">
                             <Columns>
-                                <asp:TemplateField HeaderText=" " ShowHeader="False">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgBorrar" runat="server" CommandArgument='<%# Eval("ID_ACT_HORARIO") %>' CommandName="Baja" CausesValidation="false" ToolTip="Borrar horario" OnClientClick="if(!confirm('Se va a borrar el horario de la actividad, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="center" Wrap="false" Height="26px" Width="25px" />
-                                </asp:TemplateField>
+                                 <asp:TemplateField HeaderText=" " ShowHeader="False">
+                                   <HeaderStyle Width="50" />
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgBorrarUsu" runat="server" CommandArgument='<%# Eval("ID_ACT_HORARIO") %>' CommandName="Baja" CausesValidation="false" ToolTip="Borrar horario" OnClientClick="if(!confirm('Se va a borrar el horario de la actividad, ¿desea continuar?')){return false;}" ImageUrl="~/Content/Imagenes/trash.png" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="center" Wrap="false"  />
+                            </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Días" ShowHeader="true" AccessibleHeaderText="Dias"
-                                    ControlStyle-Width="110" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="110" />
+                                    ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCortadoDoc" runat="server" Text='<%# Eval("DIAS") %>' ToolTip='<%# Eval("DIAS") %>'
-                                            Width="250">
+                                            CssClass="acortaLabel" Width="100">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Hora inicio" ShowHeader="true" AccessibleHeaderText="HoraIni"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
-                                    <ItemTemplate>
+                                      <ItemTemplate>
                                         <asp:Label ID="lbhoraini" runat="server" Text='<%# Eval("HORA_INI") %>' ToolTip='<%# Eval("HORA_INI") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel" Width="70">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Hora finalización" ShowHeader="true" AccessibleHeaderText="HoraFin"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
-                                    <ItemTemplate>
+                                        <ItemTemplate>
                                         <asp:Label ID="lbhorafin" runat="server" Text='<%# Eval("HORA_FIN") %>' ToolTip='<%# Eval("HORA_FIN") %>'
-                                            Width="100">
+                                            Width="70" CssClass="acortaLabel" >
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Cuota" ShowHeader="true" AccessibleHeaderText="Cuota"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbCuota" runat="server" Text='<%# Eval("CUOTA") %>' ToolTip='<%# Eval("CUOTA") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel" Width="70">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Monitor" ShowHeader="true" AccessibleHeaderText="Monitor"
                                     ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="Left">
-                                    <HeaderStyle Width="100" />
                                     <ItemTemplate>
                                         <asp:Label ID="lbMonitor" runat="server" Text='<%# Eval("MONITOR.NOMBRE") %>' ToolTip='<%# Eval("MONITOR.NOMBRE") %>'
-                                            Width="100">
+                                            CssClass="acortaLabel largo" Width="250">
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -204,7 +202,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="txtValor">Valor:</label>
+                                <label for="txtValor">Valor (en %):</label>
                             </div>
                             <div class="col-md-8">
                                 <asp:TextBox ID="txtValor" TextMode="Number" ToolTip="Valor del descuento en %" runat="server"></asp:TextBox>
@@ -256,6 +254,7 @@
                     <div class="col-md-3">
                     </div>
                 </div>
+                      </div>
                         </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="BtnDescuento" EventName="Click" />
@@ -267,7 +266,7 @@
                         <asp:Button ID="BtnAceptar" CssClass="boton " runat="server" ToolTip="Da de alta una nueva actividad extraescolar" OnClick="BtnAceptar_Click" Text="Aceptar" />
                     </div>
                 </div>
-            </div>
+
         </form>
         <div class="clr"></div>
     </div>

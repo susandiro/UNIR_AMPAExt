@@ -47,11 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\DynamicLibray.cs" />
-    <Compile Include="Clases\FiltroGestorUsuario.cs" />
     <Compile Include="Clases\FiltroUsuario.cs" />
-    <Compile Include="Clases\GestorTareasCls.cs" />
-    <Compile Include="Clases\PaginacionCls.cs" />
-    <Compile Include="Clases\ProductorCls.cs" />
     <Compile Include="TipoDatos.cs" />
     <Compile Include="UsuarioConexion.cs" />
     <Compile Include="Comun.cs" />

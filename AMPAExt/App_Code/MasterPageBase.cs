@@ -6,13 +6,6 @@ using AMPAExt.Comun;
 /// </summary>
 public class MasterPageBase : System.Web.UI.MasterPage
 {
-    #region atributos
-    /// <summary>
-    /// Utilidad para generar trazas de log en la aplicación
-    /// </summary>
-   // public static readonly ILog TrazaLog = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-    #endregion
-
     #region propiedades privadas
     /// <summary>
     /// true si se quiere ver el rastro de migas; false si se quiere ocultar
@@ -114,6 +107,9 @@ public class MasterPageBase : System.Web.UI.MasterPage
         set { _relativeURL = value; }
     }
   
+    /// <summary>
+    /// Propiedad para recuperar los datos del usuario logado
+    /// </summary>
     public UsuarioConexion DatosSesionLogin
     {
         get
@@ -143,7 +139,7 @@ public class MasterPageBase : System.Web.UI.MasterPage
         if (DatosSesionLogin == null || string.IsNullOrEmpty(DatosSesionLogin.Empresa))
         {
             if (_checkSesion)
-                Response.Redirect(_relativeURL + "~/ui/SesionCaducada.aspx");
+                Response.Redirect(_relativeURL + "/SesionCaducada.aspx", false);
             else
                 DatosSesionLogin = new UsuarioConexion();
         }

@@ -43,7 +43,7 @@ namespace AMPAExt.UI
         protected void BtnSalir_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("~/UI/login.aspx", false);
+            Response.Redirect(MasterBase.RelativeURL + "Login.aspx", false);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AMPAExt.UI
         /// <param name="e"></param>
         protected void Btnvolver_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/UI/index.aspx", false);
+            Response.Redirect(MasterBase.RelativeURL + "index.aspx", false);
         }
     }
 }

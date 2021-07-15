@@ -43,10 +43,7 @@ namespace AMPAExt.UI.Actividades
                     return (List<ACTIVIDAD_DESCUENTO>)Session["listadoDescuento"];
             }
         }
-        ///// <summary>
-        ///// Identificador de la empresa a modificar
-        ///// </summary>
-        //public int IdEmpresa { get; set; }
+       
         /// <summary>
         /// Antes de cargar la página se define que es necesario estar logado
         /// </summary>
@@ -88,7 +85,7 @@ namespace AMPAExt.UI.Actividades
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar modificación de empresa", ex);
-                Error("Se ha producido un error al cargar los datos de la empresa");
+                ErrorGeneral("Se ha producido un error al cargar los datos de la empresa");
             }
         }
 

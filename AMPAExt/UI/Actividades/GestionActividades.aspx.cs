@@ -6,6 +6,9 @@ using System.Web.UI.WebControls;
 
 namespace AMPAExt.UI.Actividades
 {
+    /// <summary>
+    /// clase para gestionar las actividades extraescolares
+    /// </summary>
     public partial class GestionActividades : PageBase
     {
         #region propiedades privadas
@@ -41,26 +44,31 @@ namespace AMPAExt.UI.Actividades
             {
                 if (!Page.IsPostBack)
                 {
+                    PnlConfirmacion.Visible = false;
                     CargarEmpresas();
                     CargarAMPA();
+                    CargarActivo();
                     if (FiltroInicial != null)
                         CargarFiltro();
+                    else
+                    {
+                        FiltroInicial = new Comun.FiltroActividad();
+                        FiltroInicial.Activo = "S";
+                        CargarFiltro();
+                    }
                     Session["IdEmpresa"] = null;
                     Session["IdActividad"] = null;
                     Session["listadoHorario"] = null;
                     Session["listadoDescuento"] = null;
-                    CargarActivo();
                     CargarGrid();
                 }
             }
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".Page_load()", ex);
-                _Page.Error(_MensajeError);
+                _Page.ErrorGeneral(_MensajeError);
             }
         }
-
-        #endregion
 
         /// <summary>
         /// Evento producido al pulsar sobre el botón limpiar del filtro. Carga el grid como en el estado inicial
@@ -73,7 +81,7 @@ namespace AMPAExt.UI.Actividades
             {
                 cmbEmpresa.ClearSelection();
                 cmbAMPA.ClearSelection();
-                cmbActivo.ClearSelection();
+                cmbActivo.SelectedValue="S";
                 txtNombre.Text = string.Empty;
                 Session.Remove("FiltroActividad");
                 CargarGrid();
@@ -84,6 +92,7 @@ namespace AMPAExt.UI.Actividades
                 ScriptManager.RegisterStartupScript(Page, GetType(), "GestorActi", "alert('Se ha producido un error al limpiar los datos del filtro');", true);
             }
         }
+
         /// <summary>
         /// Evento producido al pulsar sobre el botón filtrar del filtro. Carga el grid con los criterios indicados en el filtro
         /// </summary>
@@ -102,17 +111,31 @@ namespace AMPAExt.UI.Actividades
             }
         }
 
-        #region Eventos del grid
         /// <summary>
-        /// Recarga el grid después de la paginación.
+        /// Evento tras confirmar la baja junto con alumnos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void gridPaginacion_RecargarGrid(object sender, EventArgs e)
+        protected void PnlConfirmacion_AceptarCrear(object sender, EventArgs e)
         {
-            //FiltroInicial.Paginacion = gridPaginacion.Paginacion;
-            //CargarGrid();
+            int idActividad = int.Parse(Session["IdActividadBorrar"].ToString());
+            ACTIVIDAD actividad = NegActividad.GetActividadById(idActividad);
+            actividad.USUARIO = MasterBase.DatosSesionLogin.DatosUsuario;
+            actividad.FECHA_MOD = DateTime.Now;
+            if (!NegActividad.BajaActividad(actividad))
+            {
+                Comun.Log.TrazaLog.Error("No se ha podido dar de baja la actividad " + idActividad.ToString());
+                ErrorGeneral("Se ha producido un error al intentar dar de baja la actividad");
+                return;
+            }
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "mensaje", "CerrarMensaje();alert('La actividad ha sido dada de baja correctamente.');", true);
+            //Se carga el grid de nuevo para que desaparezca la actividad borrada
+            CargarGrid();
         }
+        #endregion
+
+        #region Eventos del grid
+
         /// <summary>
         /// Procedimiento de la grid, al crear una fila
         /// </summary>
@@ -122,6 +145,12 @@ namespace AMPAExt.UI.Actividades
             {
                 e.Row.Attributes.Add("onmouseover", "this.style.background='#FFF0A2'");
                 e.Row.Attributes.Add("onmouseout", "this.style.background='#FFFFFF'");
+                //Si no está activa, no se puede ni modificar ni eliminar
+                if (gvActividad.DataKeys[e.Row.RowIndex].Value.ToString() == "N")
+                {
+                    e.Row.FindControl("imgMod").Visible = false;
+                    e.Row.FindControl("imgBorrar").Visible = false;
+                }
             }
         }
 
@@ -149,18 +178,26 @@ namespace AMPAExt.UI.Actividades
                         {
                             List<ALUMNO_ACTIVIDAD> alumnos = NegActividad.GetAlumnnosByActividad(idActividad);
                             if (alumnos != null && alumnos.Count > 0)
-                                ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "if(!confirm('Se han encontrado alumnos asociados a la actividad. En caso de continuar, los alumnos también se darán de baja en la actividad, ¿desea continuar?')){return false;} else {document.getElementById('" + BtnConfirmar.ClientID + "').click();}", true);
+                            {
+                                Session["IdActividadBorrar"] = idActividad;
+                                PnlConfirmacion.AbrirMensajeConfirmacion("Se han encontrado alumnos asociados a la actividad. En caso de continuar, los alumnos también se darán de baja en la actividad, ¿desea continuar?");
+                                PnlConfirmacion.Visible = true;
+                             }
                             else //Se borra
                             {
+                                PnlConfirmacion.Visible = false;
                                 ACTIVIDAD actividad = NegActividad.GetActividadById(idActividad);
                                 actividad.USUARIO = MasterBase.DatosSesionLogin.DatosUsuario;
                                 actividad.FECHA_MOD = DateTime.Now;
                                 if (!NegActividad.BajaActividad(actividad))
                                 {
                                     Comun.Log.TrazaLog.Error("No se ha podido dar de baja la actividad " + idActividad.ToString());
-                                    Error("Se ha producido un error al intentar dar de baja la actividad");
+                                    ErrorGeneral("Se ha producido un error al intentar dar de baja la actividad");
                                     return;
                                 }
+                                //Se carga el grid de nuevo para que desaparezca la actividad borrada
+                                CargarGrid();
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta" + Guid.NewGuid(), "CerrarMensaje(); alert('La actividad ha sido dada de baja correctamente.');", true);
                             }
                         }
                         catch (Exception ex)
@@ -169,15 +206,14 @@ namespace AMPAExt.UI.Actividades
                             ScriptManager.RegisterStartupScript(Page, GetType(), "gestor", "alert('Se ha producido un error al dar de baja la actividad extraescolar');", true);
                             return;
                         }
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", "alert('La actividad ha sido dada de baja correctamente.');", true);
-                        //Se carga el grid de nuevo para que desaparezca el usuario borrado
-                        CargarGrid();
                         break;
                 }
             }
         }
 
         #endregion
+
+        #region Carga de datos
 
         /// <summary>
         /// Asigna los valores del filtro
@@ -217,7 +253,7 @@ namespace AMPAExt.UI.Actividades
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error en " + this.GetType().FullName + ".SetFiltro(). Descripcion; ", ex);
-                _Page.Error("Ha ocurrido un error al establecer el filtro de la página");
+                _Page.ErrorGeneral("Ha ocurrido un error al establecer el filtro de la página");
             }
             return filtro;
         }
@@ -233,7 +269,7 @@ namespace AMPAExt.UI.Actividades
                     txtNombre.Text = filtro.Nombre;
 
                 if (!string.IsNullOrEmpty(filtro.Activo))
-                    cmbEmpresa.SelectedValue = filtro.Activo;
+                    cmbActivo.SelectedValue = filtro.Activo;
 
                 if (filtro.IdEmpresa > 0)
                     cmbEmpresa.SelectedValue = filtro.IdEmpresa.ToString();
@@ -334,13 +370,10 @@ namespace AMPAExt.UI.Actividades
         {
             cmbActivo.Items.Clear();
             cmbActivo.Items.Add(new ListItem("-- Seleccione --", ""));
-            cmbActivo.Items.Add(new ListItem("S", "S"));
-            cmbActivo.Items.Add(new ListItem("N", "N"));
+            cmbActivo.Items.Add(new ListItem("Sí", "S"));
+            cmbActivo.Items.Add(new ListItem("No", "N"));
         }
 
-        protected void BtnConfirmar_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

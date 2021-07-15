@@ -1,9 +1,6 @@
 ﻿using System;
 using AMPA.Modelo;
-using System.Collections.Generic;
-using System.Text;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace AMPAExt.UI.Actividades
 {
@@ -16,6 +13,7 @@ namespace AMPAExt.UI.Actividades
         /// Identificador de la actividad a modificar
         /// </summary>
         public int IdActividad { get; set; }
+
         /// <summary>
         /// Antes de cargar la página se define que es necesario estar logado
         /// </summary>
@@ -53,7 +51,7 @@ namespace AMPAExt.UI.Actividades
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el detalle de la actividad", ex);
-                Error("Se ha producido un error al cargar el detalle de la actividad");
+                ErrorGeneral("Se ha producido un error al cargar el detalle de la actividad");
             }
         }
 

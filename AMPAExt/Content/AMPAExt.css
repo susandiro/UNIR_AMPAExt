@@ -647,7 +647,16 @@ a.menu {
     -o-text-overflow: ellipsis; /* para versiones de Opera inferiores a la 11*/
     -ms-text-overflow: ellipsis; /* para IE8*/
 }
+.corto{
+    max-width:150px;
+}
+.largo{
+    max-width:250px;
+}
 
+.medio{
+    max-width:200px;
+}
 
 .gridViewPaginacion td {
     background-color: #435B14;
@@ -718,4 +727,24 @@ a.menu {
 
 .imgBoton{
     max-width:30px!important;
+}
+.fondoGris{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:999;
+    display:none;
+    background-color: rgba(0,0,0,0.30);
+}
+
+.panelConfirmacion{
+    position:fixed!important;
+    top:20%;
+    z-index:1000;
+    display:none;
+    width:35%;
+    left:25%
+
 }

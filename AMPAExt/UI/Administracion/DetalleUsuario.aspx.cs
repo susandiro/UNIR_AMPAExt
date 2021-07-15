@@ -56,7 +56,7 @@ namespace AMPAExt.UI.Administracion
             catch(Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar el usuario de AMPA.", ex);
-                Error("Se ha producido un error al cargar los datos del usuario de AMPA");
+                ErrorGeneral("Se ha producido un error al cargar los datos del usuario de AMPA");
             }
         }
 

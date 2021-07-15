@@ -55,7 +55,7 @@ namespace AMPAExt.UI.Extraescolar
             catch (Exception ex)
             {
                 Comun.Log.TrazaLog.Error("Error al cargar modificación de empresa", ex);
-                Error("Se ha producido un error al cargar los datos de la empresa");
+                ErrorGeneral("Se ha producido un error al cargar los datos de la empresa");
             }
         }
 
@@ -230,8 +230,7 @@ namespace AMPAExt.UI.Extraescolar
             if (gvMonitores.Rows.Count > 0)
             {
                 //Se recupera el identificador del usuario
-                string[] parametros = e.CommandArgument.ToString().Split(',');
-                int idMonitor = int.Parse(parametros[0]);
+                int idMonitor = int.Parse(e.CommandArgument.ToString());
                 switch (e.CommandName)
                 {
                     case "Consulta":
@@ -245,12 +244,11 @@ namespace AMPAExt.UI.Extraescolar
                     case "Baja":
                         try
                         {
-                            int idEmpresa = int.Parse(parametros[1]);
                             //Se borra al monitor de la empresa
-                            if (!NegExtraescolar.BajaMonitor(idMonitor, idEmpresa))
+                            if (!NegExtraescolar.BajaMonitor(idMonitor, IdEmpresa))
                             {
                                 Comun.Log.TrazaLog.Error("No se ha podido dar de baja el monitor " + idMonitor.ToString());
-                                Error("Se ha producido un error al intentar dar de baja al monitor para la empresa");
+                                ErrorGeneral("Se ha producido un error al intentar dar de baja al monitor para la empresa");
                                 return;
                             }
 

@@ -71,7 +71,7 @@
                         <label for="txtTelefono">Teléfono: </label>
                     </div>
                     <div class="col-md-7">
-                        <asp:TextBox ID="txtTelefono" TextMode="Phone" ToolTip="Teléfono del usuario" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtTelefono" TextMode="Phone" MaxLength="15" ToolTip="Teléfono del usuario" runat="server"></asp:TextBox>
                     </div>
                      <div class="col-md-2">
                         <asp:Label ID="lblTelefono" runat="server" Text="Obligatorio" CssClass="errorValid" Visible="false"></asp:Label>
