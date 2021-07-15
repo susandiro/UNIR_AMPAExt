@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS [dbo].[TIPO_DOCUMENTO]
 GO
 
 --------------------------
---  Creaci髇 de tablas	--
+--  Creaci贸n de tablas	--
 --------------------------
 --------------------------
 --  Tabla AMPA	--
@@ -59,8 +59,8 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'ID_AMPA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'NOMBRE'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de Identificaci髇 Fiscal de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'NIF'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de Identificaci贸n Fiscal de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'NIF'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n de la AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
 GO
 
 
@@ -81,14 +81,14 @@ CREATE TABLE EMPRESA(
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'ID_EMPRESA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de Identificaci髇 Fiscal de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'NIF'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de Identificaci贸n Fiscal de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'NIF'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'NOMBRE'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Raz髇 social de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'RAZON_SOCIAL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'P醙ina web de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'PAGINA_WEB'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Raz贸n social de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'RAZON_SOCIAL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'P谩gina web de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'PAGINA_WEB'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que la empresa ha sido modificada' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 ----------------------------------
@@ -110,10 +110,10 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la AMPA a la que pertenece la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'ID_AMPA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'ID_EMPRESA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Indicativo de si la empresa se encuentra activa para el tipo de usuario (Valores: S/N)' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'ACTIVO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que la empresa ha sido modificada' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Motivo por el que la empresa ha sido dada de baja' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'MOTIVO_BAJA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'USUARIO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Observaciones a incorporar sobre la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'EMPRESA_AMPA', @level2type=N'COLUMN', @level2name=N'OBSERVACIONES'
 GO
 
@@ -129,7 +129,7 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del tipo de documento' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN', @level2name=N'NOMBRE'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Descripci髇 del tipo de documento' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN', @level2name=N'DESCRIPCION'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Descripci贸n del tipo de documento' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN', @level2name=N'DESCRIPCION'
 GO
 
 ----------------------
@@ -157,24 +157,24 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'ID_USUARIO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la AMPA a la que se asocia el usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'ID_AMPA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de documento de identificaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de documento de identificaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'NOMBRE'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellido del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'APELLIDO1'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'APELLIDO2'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr髇ico de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'EMAIL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'LOGIN'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase馻 de acceso a la aplicaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'PASSWORD'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr贸nico de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'EMAIL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'LOGIN'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase帽a de acceso a la aplicaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'PASSWORD'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Observaciones del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'OBSERVACIONES'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el usuario ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_AMPA', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 
 ------------------------------
---  Tabla USUARIO_EMPRESA	-- 
+--  Tabla USUARIO_EMPRESA   -- 
 ------------------------------
 CREATE TABLE USUARIO_EMPRESA(
 	ID_USUARIO_EMP      INT IDENTITY(1,1) PRIMARY KEY,
@@ -197,24 +197,24 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'ID_USUARIO_EMP'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la empresa a la que se asocia el usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'ID_EMPRESA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de documento de identificaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de documento de identificaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'NOMBRE'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellido del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'APELLIDO1'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'APELLIDO2'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr髇ico de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'EMAIL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'LOGIN'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase馻 de acceso a la aplicaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'PASSWORD'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr贸nico de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'EMAIL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'LOGIN'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase帽a de acceso a la aplicaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'PASSWORD'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Observaciones del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'OBSERVACIONES'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del usuario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el usuario ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'USUARIO_EMPRESA', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
-------------------------------
+--------------------------
 --  Tabla ACTIVIDAD	-- 
-------------------------------
+--------------------------
 CREATE TABLE ACTIVIDAD(
 	ID_ACTIVIDAD        INT IDENTITY(1,1) PRIMARY KEY,
 	ID_EMPRESA		    INT NOT NULL FOREIGN KEY REFERENCES EMPRESA (ID_EMPRESA),
@@ -233,12 +233,12 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la empresa' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ID_EMPRESA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de La AMPA' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ID_AMPA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'NOMBRE'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Descripci髇 de la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'DESCRIPCION'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Descripci贸n de la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'DESCRIPCION'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'si la actividad se encuentra activa en el sistema S/N' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ACTIVO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Observaciones a la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'OBSERVACIONES'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el registro ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 ------------------------------
@@ -261,18 +261,18 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la tabla' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'ID_ACT_HORARIO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'ID_ACTIVIDAD'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del monitor que imparte la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'ID_MONITOR'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'D韆s en los que se imparte la actividad. Secuencia de iniciales separadas por coma (L,M,X,J,V)' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'DIAS'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'D铆as en los que se imparte la actividad. Secuencia de iniciales separadas por coma (L,M,X,J,V)' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'DIAS'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Hora de inicio en la que se imparte la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'HORA_INI'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Hora de fin en la que se imparte la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'HORA_FIN'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cuota asociada a la actividad en el horario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=
 N'COLUMN', @level2name=N'CUOTA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el registro ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_HORARIO', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 ------------------------------
---  Tabla DESCUENTO      	-- 
+--  Tabla DESCUENTO         -- 
 ------------------------------
 CREATE TABLE DESCUENTO(
 	ID_DESCUENTO    INT IDENTITY(1,1) PRIMARY KEY,
@@ -302,13 +302,13 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la tabla' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'ID_ACT_DESCUENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la actividad' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'ID_ACTIVIDAD'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Valor del descuento' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'VALOR'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el registro ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ACTIVIDAD_DESCUENTO', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 ------------------------------
---  Tabla MONITOR	        -- 
+--  Tabla MONITOR	    -- 
 ------------------------------
 CREATE TABLE MONITOR(
 	ID_MONITOR      	INT IDENTITY(1,1) PRIMARY KEY,
@@ -330,23 +330,23 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'ID_MONITOR'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la empresa a la que pertenece el monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'ID_EMPRESA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci髇 del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de documento de identificaci髇 del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci贸n del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'ID_TIPO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de documento de identificaci贸n del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'NUMERO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'NOMBRE'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellido del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'APELLIDO1'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'APELLIDO2'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr髇ico de contacto del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'EMAIL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'TELEFONO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci髇 del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'LOGIN'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase馻 de acceso a la aplicaci髇 del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'PASSWORD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr贸nico de contacto del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'EMAIL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso a la aplicaci贸n del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'LOGIN'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contrase帽a de acceso a la aplicaci贸n del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'PASSWORD'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del monitor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el monitor ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'MONITOR', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
-------------------------------
+--------------------------
 --  Tabla CURSO      	-- 
-------------------------------
+--------------------------
 CREATE TABLE CURSO(
 	ID_CURSO    INT IDENTITY(1,1) PRIMARY KEY,
 	NOMBRE		VARCHAR (20) NOT NULL
@@ -411,9 +411,9 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellid
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'APELLIDO2'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de nacimiento del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'FECHA_NACIMIENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del curso y letra al que pertenece' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'ID_CURSO_CLASE'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el alumno ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 --------------------------
@@ -446,32 +446,32 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tutor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'ID_TUTOR'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del AMPA al que pertenece el tutor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'ID_AMPA'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci髇 del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_ID_TIPO_DOCUMENTO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de documento de identificaci髇 del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_NUMERO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci贸n del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_ID_TIPO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de documento de identificaci贸n del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_NUMERO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_NOMBRE'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellido del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_APELLIDO1'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_APELLIDO2'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr髇ico de contacto del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_EMAIL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_TELEFONO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci髇 del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_ID_TIPO_DOCUMENTO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N鷐ero de documento de identificaci髇 del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_NUMERO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr贸nico de contacto del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_EMAIL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto del tutor1' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T1_TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del tipo de documento de identificaci贸n del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_ID_TIPO_DOCUMENTO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'N煤mero de documento de identificaci贸n del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_NUMERO_DOCUMENTO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_NOMBRE'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Primer apellido del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_APELLIDO1'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Segundo apellido del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_APELLIDO2'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr髇ico de contacto del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_EMAIL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel閒ono de contacto del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_TELEFONO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo electr贸nico de contacto del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_EMAIL'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Tel茅fono de contacto del tutor2' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'T2_TELEFONO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Indicador de si responden de forma individual S/N' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'INDIVIDUAL'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del tutor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del tutor' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el tutor ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'TUTOR', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
 
 
 ------------------------------
---  Tabla ALUMNO_ACTIVIDAD	-- 
+--  Tabla ALUMNO_ACTIVIDAD  -- 
 ------------------------------
 CREATE TABLE ALUMNO_ACTIVIDAD(
-    ID_ALUM_ACT	    INT IDENTITY(1,1) PRIMARY KEY,
+    	ID_ALUM_ACT	    INT IDENTITY(1,1) PRIMARY KEY,
 	ID_ALUMNO		INT NOT NULL FOREIGN KEY REFERENCES ALUMNO (ID_ALUMNO),
 	ID_ACT_HORARIO	INT NOT NULL FOREIGN KEY REFERENCES ACTIVIDAD_HORARIO (ID_ACT_HORARIO),
 	FECHA			DATETIME	  DEFAULT GETDATE() NOT NULL,
@@ -483,7 +483,7 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ID_ALUM_ACT'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ID_ALUMNO'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Identificador de la actividad y horario' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'ID_ACT_HORARIO'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci髇 del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha de creaci贸n del alumno' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha en que el alumno ha sido modificado' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'FECHA_MOD'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci髇 del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'USUARIO'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usuario que realiza la actualizaci贸n del registro' , @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level1name=N'ALUMNO_ACTIVIDAD', @level2type=N'COLUMN', @level2name=N'USUARIO'
 GO
