@@ -4,24 +4,24 @@
   INSERT INTO AMPAEXT.dbo.TIPO_DOCUMENTO
   (NOMBRE,DESCRIPCION)
   VALUES
-  ('NIF', 'Número de Identificación Fiscal')
+  ('NIF', 'NÃºmero de IdentificaciÃ³n Fiscal')
 
   INSERT INTO AMPAEXT.dbo.TIPO_DOCUMENTO
   (NOMBRE,DESCRIPCION)
   VALUES
-  ('NIE', 'Número de Identidad de Extranjero')
+  ('NIE', 'NÃºmero de Identidad de Extranjero')
   
   INSERT INTO AMPAEXT.dbo.TIPO_DOCUMENTO
   (NOMBRE,DESCRIPCION)
   VALUES
-  ('OTRO', 'Otro tipo de documentación')
+  ('OTRO', 'Otro tipo de documentaciÃ³n')
   /*---------- Fin --------------*/
   
   /*---------- Carga de decuentos--------------*/
   INSERT INTO AMPAEXT.dbo.DESCUENTO
   (NOMBRE)
   VALUES
-  ('Inscrito más de un hijo')
+  ('Inscrito mÃ¡s de un hijo')
 
   INSERT INTO AMPAEXT.dbo.DESCUENTO
   (NOMBRE)
@@ -36,7 +36,7 @@
   INSERT INTO AMPAEXT.dbo.DESCUENTO
   (NOMBRE)
   VALUES
-  ('Renta mínima')
+  ('Renta mÃ­nima')
   
   /*---------- Fin --------------*/
   
@@ -59,32 +59,32 @@
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('1º primaria')
+  ('1Âº primaria')
 
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('2º primaria')
+  ('2Âº primaria')
 
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('3º primaria')
+  ('3Âº primaria')
 
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('4º primaria')
+  ('4Âº primaria')
 
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('5º primaria')
+  ('5Âº primaria')
   
   INSERT INTO AMPAEXT.dbo.CURSO
   (NOMBRE)
   VALUES
-  ('6º primaria')
+  ('6Âº primaria')
   /*---------- Fin --------------*/
   
   /*---------- Carga de clases--------------*/
@@ -120,7 +120,7 @@
   /*---------- Carga del usuario administrador del sistema --------------*/
   INSERT INTO AMPAEXT.dbo.USUARIO_AMPA
   (ID_AMPA, ID_TIPO_DOCUMENTO,NUMERO_DOCUMENTO,NOMBRE,APELLIDO1,APELLIDO2,EMAIL,TELEFONO,LOGIN,PASSWORD,OBSERVACIONES,FECHA,FECHA_MOD,USUARIO)
-  SELECT ID_AMPA, (SELECT ID_TIPO_DOCUMENTO FROM AMPAEXT.dbo.TIPO_DOCUMENTO WHERE NOMBRE = 'NIF'), '50212452W', 'SUSANA', 'DÍAZ', 'ROJO', 'susana.diaz212@comunidadunir.net', '612345678', '50212452W', '4174629424db98bb22a6fb6feb341019a47fa7128711ac225f65a890ed5cc6bc', NULL, GETDATE(), NULL, 'SYS_ADMINISTRADOR'
+  SELECT ID_AMPA, (SELECT ID_TIPO_DOCUMENTO FROM AMPAEXT.dbo.TIPO_DOCUMENTO WHERE NOMBRE = 'NIF'), '12345678Z', 'usuario', 'apellido1', 'apellido2', 'correo@correo.net', '612345678', '12345678Z', '2558a34d4d20964ca1d272ab26ccce9511d880579593cd4c9e01ab91ed00f325', NULL, GETDATE(), NULL, 'SYS_ADMINISTRADOR'
   FROM AMPA
   WHERE NIF = '00000000T'
   
